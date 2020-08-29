@@ -1,10 +1,10 @@
-@servers(['web' => 'devops@dev.redtech.co.id'])
+@servers(['web' => '192.168.100.101'])
 
 @setup
     # User/project variables
 
     # System variables
-    $repository_ip = 'dev.redtech.co.id';
+    $repository_ip = '192.168.100.101';
     $gitlab_username = $dockeruser;
     $gitlab_project_name = $project;
     $gitlab_project__branch_name = $branch;
