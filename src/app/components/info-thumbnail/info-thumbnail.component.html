@@ -1,0 +1,34 @@
+<!-- news -->
+<a *ngIf="!files" routerLink="{{ link }}/{{ dataInfo.seotitle }}" class="info-thumbnail">
+    <div class="row m-0">
+        <div class="col-2 p-0">
+            <div class="bg-date h-lg-100">
+                <p class="month d-xl-block d-none">{{ dataInfo.published_at | date: "MMMM" }}</p>
+                <p class="month d-xl-none d-block">{{ dataInfo.published_at | date: "MMM" }}</p>
+                <p class="date"><b>{{ dataInfo.published_at | date: "dd" }}</b></p>
+                <p class="year">{{ dataInfo.published_at | date: "yyyy" }}</p>
+            </div>
+        </div>
+        <div class="col-10 pr-lg-3 pr-0 detail">
+            <h6 class="title c-blue">{{ dataInfo.title }}</h6>
+            <div class="sum" [innerHTML]="dataInfo.summary"></div>
+        </div>
+    </div>
+</a>
+<!-- files -->
+<a *ngIf="files" [href]="link + dataInfo.filename" target="_blank" class="info-thumbnail">
+    <div class="row m-0">
+        <div class="col-2 p-0">
+            <div class="bg-date h-lg-100">
+                <p class="month d-xl-block d-none">{{ dataInfo.published_at | date: "MMMM" }}</p>
+                <p class="month d-xl-none d-block">{{ dataInfo.published_at | date: "MMM" }}</p>
+                <p class="date"><b>{{ dataInfo.published_at | date: "dd" }}</b></p>
+                <p class="year">{{ dataInfo.published_at | date: "yyyy" }}</p>
+            </div>
+        </div>
+        <div class="col-10 pr-lg-3 pr-0 detail">
+            <h6 class="title c-blue">{{ dataInfo.title }}</h6>
+            <div class="sum" [innerHTML]="dataInfo.summary"></div>
+        </div>
+    </div>
+</a>

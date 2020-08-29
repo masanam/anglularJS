@@ -1,0 +1,29 @@
+.news{
+    .thumb{
+        img{
+            height: 200px;
+            object-fit: cover;
+        }
+    }
+    .detail{
+         font-size: 0.95rem;
+    }
+    &:hover{
+        .detail{
+            h6.title{
+                color: #faa71d;
+            }
+        } 
+    }
+}
+
+// Responsive 
+
+@media only screen and (max-width: 575px){
+    .news{
+        .detail{
+            padding-bottom: 12px;
+            border-bottom: 1px #d8c6c6 solid;
+        }
+    }
+}

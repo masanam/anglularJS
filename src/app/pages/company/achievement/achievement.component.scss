@@ -1,0 +1,78 @@
+.achiev-certifi{
+    .certifi{
+        .table-ver1{
+            th{
+                width: 50%;
+            }
+        }
+    }
+    .modal-achiv{
+        .modal-body {
+            padding: 0px;
+        }
+        .modal-dialog .modal-x i{
+            color: white !important;
+        }
+        .bg-archiv {
+            height: 500px;
+            width: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .read-more {
+            h6{
+                color: #FAA419;
+                border-bottom: 1px solid;
+                cursor: pointer;
+                display: inline-block;
+            }
+            position: absolute;
+            bottom: 0px;
+            padding: 10px 0px;
+            width: 100%;
+            background-color: white;
+            left: 0px;
+            text-align: center;
+            z-index: 1;
+        }
+        .detail {
+            height: 200px;
+            overflow: hidden;
+            padding-top: 2.5rem;
+            transition: height .3s linear;
+            &.active{
+                height: 100%;
+            }
+        }
+    }
+}
+
+
+
+// Responsive
+
+@media only screen and (max-width: 991px){
+    .achiev-certifi{
+        .modal-achiv{
+            .bg-archiv {
+                height: 300px;
+            }
+            .detail {
+                padding-top: 1.5rem;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 575px){
+    .achiev-certifi{
+        .certifi{
+            .table-ver1{
+                td{
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,22 @@
+<div class="widget-career">
+    <div class="title text-md-left text-center mb-4">
+        <h5 class="c-blue">{{ dataWidget.title }}</h5>
+        <hr class="yellow-border ml-md-0">
+    </div>
+    <div class="row">
+        <!-- widget image -->
+        <div class="col-lg-4 col-md-5 widget-img">
+            <div class="full-pad15">
+                <img [src]="apiAsset + dataWidget.picture" 
+                    class="w-100" 
+                    [alt]="dataWidget.title">
+            </div>
+        </div>
+        <!-- content detail -->
+        <div class="col-lg-8 col-md-7">
+            <div class="detail">
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </div>
+</div>

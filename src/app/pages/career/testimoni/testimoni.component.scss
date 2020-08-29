@@ -1,0 +1,88 @@
+.testimoni{
+    .testi-peop{
+        font-size: 0.8rem;
+        h6{
+            font-size: 0.95rem;
+        }
+        .blue-btn{
+            padding: 5px 20px;
+            font-size: 0.8rem;
+        }
+        .summary{
+            height: 115px;
+            overflow: hidden;
+        }
+        img{
+            object-fit: contain;
+            height: 200px;
+        }
+    }
+
+    .modal-testy{
+        .modal-body {
+            padding: 1.3rem;
+            padding-top: 2.5rem;
+            .img{
+                width: 20%;
+            }
+            .detail{
+                width: 80%;
+                font-size: 0.9rem;
+                // .tesy{
+                //     height: 220px;
+                //     overflow: hidden;
+                //     overflow-y: scroll;
+                //     padding-right: 15px;
+                // }
+            }
+        }
+    }
+}
+
+// Responsive
+
+@media only screen and (min-width: 768px){
+    .testimoni{
+        .testi-peop{
+            h6{
+                height: 36px;
+                overflow: hidden;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 991px){
+    .testimoni{
+        .modal-testy{
+            .modal-body{
+                padding: 1rem;
+                padding-top: 2.3rem;
+                .detail{
+                    font-size: 0.6rem;
+                    // .tesy{
+                    //     height: 150px;
+                    //     padding-right: 10px;
+                    // }
+                    h6{
+                        font-size: 0.7rem;
+                    }
+                    h5{
+                        font-size: 0.9rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 767px){
+    .testimoni{
+        .testi-peop{
+            .summary{
+                height: 80px;
+            }
+        }
+    }
+}

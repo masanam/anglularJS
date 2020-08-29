@@ -1,0 +1,64 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="share-info" *ngIf="!loading && bgImg && dataGraphic">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <div class="info my-md-5 my-4">
+        <div class="title text-md-left text-center mb-md-5 mb-4">
+            <h4 class="c-blue">{{ titlePage }}</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="row">
+            <!-- desktop -->
+            <div class="col-xl-6 col-md-7 py-grafik d-lg-block d-none">
+                <lib-ngx-image-zoom
+                    [enableLens]="true"
+                    lensHeight="85"
+                    lensWidth="85"
+                    [magnification]="1.6"
+                    [thumbImage]="dataGraphic"
+                ></lib-ngx-image-zoom>
+            </div>
+            <!-- mobile -->
+            <div class="col-xl-6 col-md-7 py-grafik d-lg-none d-block">
+                <lib-ngx-image-zoom
+                    [enableLens]="true"
+                    lensHeight="70"
+                    lensWidth="70"
+                    [magnification]="1.1"
+                    [thumbImage]="dataGraphic"
+                ></lib-ngx-image-zoom>
+            </div>
+            <div class="col-xl-5 col-md-5 mt-md-0 mt-5 text-center">
+                <table class="w-100 c-blue">
+                    <tr *ngIf="langTit === 'id'">
+                        <th class="head">Tanggal</th>
+                        <th class="head">Harga Penutupan</th>
+                    </tr>
+                    <tr *ngIf="langTit === 'en'">
+                        <th class="head">Date</th>
+                        <th class="head">Closing Price</th>
+                    </tr>
+                    <tr *ngFor="let data of comData">
+                        <td>{{ data.tanggal | date: "MMM-yy" }}</td>
+                        <td>{{ data.price }}</td>
+                    </tr>
+                </table>
+                <button *ngIf="btnLoad" 
+                        id="load-more" 
+                        [disabled]="textLoad === 'Loading...'"
+                        class="btn px-4 blue-btn mt-4" 
+                        (click)="getMore()">
+                        {{ textLoad }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        
+
+

@@ -1,0 +1,94 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="meeting" *ngIf="!loading && bgImg && dataDividen && dataShareholder">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <div class="share-holder mt-md-5 mt-4">
+        <div class="title text-md-left text-center mb-4">
+            <h4 *ngIf="langTit === 'en'" class="c-blue">Shareholder Announcement</h4>
+            <h4 *ngIf="langTit === 'id'" class="c-blue">Pengumuman Pemegang Saham</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="row file-row1">
+            <div class="col-sm-4 col-6 pad" 
+                *ngFor="let holder of dataShareholder
+                | paginate: { id: 'holder', itemsPerPage: 6, currentPage: pageShareholder}">
+                <app-files [dataFiles]="holder"></app-files>
+            </div>
+        </div>
+        <pagination-template 
+            id="holder"
+            #meet="paginationApi" 
+            (pageChange)="pageShareholder = $event" 
+            autoHide="true" 
+            maxSize="5">
+            <nav class="py-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" 
+                        [class.disabled]="meet.isFirstPage()" 
+                        aria-disabled="true">
+                        <a class="page-link" (click)="meet.previous()">Prev</a>
+                    </li>
+                    <div *ngFor="let page of meet.pages" 
+                        [class.current]="meet.getCurrent() === page.value">
+                        <li class="page-item">
+                            <a class="page-link" 
+                            (click)="meet.setCurrent(page.value)"
+                                *ngIf="meet.getCurrent() !== page.value">
+                                <span>{{ page.label }}</span>
+                            </a>
+                        </li>
+                        <li class="page-item active" *ngIf="meet.getCurrent() === page.value">
+                            <a class="page-link" class="page-link">
+                                <span>{{ page.label }}</span>
+                            </a>
+                        </li>                        
+                    </div>
+                    <li class="page-item" 
+                        [class.disabled]="meet.isLastPage()" 
+                        aria-disabled="true">
+                        <a class="page-link" (click)="meet.next()">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </pagination-template>
+    </div>
+    <div class="dividen pb-3">
+        <div class="title text-md-left text-center mb-5">
+            <h4 *ngIf="langTit === 'en'" class="c-blue">Dividend</h4>
+            <h4 *ngIf="langTit === 'id'" class="c-blue">Dividen</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="full-pad15">
+            <table class="w-100 table-ver1 text-center">
+                <tr class="head" *ngIf="langTit === 'id'">
+                    <th>Tahun Buku</th>
+                    <th>Tanggal Pembayaran</th>
+                    <th>Dividen Per Lembar Saham</th>
+                    <th>Total Dividen (Rp)</th>   
+                </tr>
+                <tr class="head" *ngIf="langTit === 'en'">
+                    <th>Financial Year</th>
+                    <th>Payment Date</th>
+                    <th>Dividend Per Share</th>
+                    <th>Total Dividend (Rp)</th>
+                </tr>
+                <tr class="data" *ngFor="let dividen of dataDividen">
+                    <td>{{ dividen.year }}</td>
+                    <td>{{ dividen.payment_date | date: "dd MMMM yyyy" }}</td>
+                    <td>{{ dividen.share | number}}</td>
+                    <td>{{ dividen.total | number }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+        
+
+
+
+

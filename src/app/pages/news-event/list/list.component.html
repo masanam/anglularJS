@@ -1,0 +1,56 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="list-news" *ngIf="!loading && bgImg && dataNews">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}"></div>
+    </div>
+    <div class="all mt-md-5 mt-4">
+        <div class="title text-md-left text-center mb-4">
+            <h4 class="c-blue">{{ titlePage }}</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="row row-list">
+            <div class="col-sm-6 py-3 px-lg-4 blast-none" *ngFor="let news of dataNews
+            | paginate: { id: 'list', itemsPerPage: 6, currentPage: pageList}">
+                <app-list-news [data]="news"></app-list-news>
+            </div>
+        </div>
+        <pagination-template 
+            id="list"
+            #dlist="paginationApi" 
+            (pageChange)="pageList = $event" 
+            autoHide="true" 
+            maxSize="5">
+            <nav class="pt-4">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" 
+                        [class.disabled]="dlist.isFirstPage()" 
+                        aria-disabled="true">
+                        <a class="page-link" (click)="dlist.previous()">Prev</a>
+                    </li>
+                    <div *ngFor="let page of dlist.pages" 
+                        [class.current]="dlist.getCurrent() === page.value">
+                        <li class="page-item">
+                            <a class="page-link" 
+                            (click)="dlist.setCurrent(page.value)"
+                                *ngIf="dlist.getCurrent() !== page.value">
+                                <span>{{ page.label }}</span>
+                            </a>
+                        </li>
+                        <li class="page-item active" *ngIf="dlist.getCurrent() === page.value">
+                            <a class="page-link" class="page-link">
+                                <span>{{ page.label }}</span>
+                            </a>
+                        </li>                        
+                    </div>
+                    <li class="page-item" 
+                        [class.disabled]="dlist.isLastPage()" 
+                        aria-disabled="true">
+                        <a class="page-link" (click)="dlist.next()">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </pagination-template>
+    </div>
+</div>

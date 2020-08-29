@@ -1,0 +1,36 @@
+<div class="load-data" *ngIf="loading">
+   <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+</div>
+<div class="milestones" *ngIf="!loading && bgImg && dataMilestone">
+   <div class="full-pad15">
+      <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+      </div>
+   </div>
+   <div class="list-group mt-md-5 mt-4">
+      <div class="title text-md-left text-center mb-4">
+         <h4 class="c-blue">{{ titlePage }}</h4>
+         <hr class="yellow-border ml-md-0">
+      </div>
+      <div class="milestone_ct mt-3 px-md-4">
+         <div class="milestone-container">
+            <owl-carousel-o [options]="customOptions1">
+                  <ng-container *ngFor="let mile of dataMilestone; let i = index">
+                     <ng-template [width]="number" carouselSlide>
+                        <div class="item bullet-year" [ngClass]="{'active': i === 0}">
+                           <h5>{{ mile.year }}</h5>
+                           <a (click)="takeDetail(mile, $event)">&nbsp;</a>
+                        </div>
+                     </ng-template>
+                  </ng-container>
+            </owl-carousel-o>
+         </div>
+         <div class="milestonebox mt-5">
+            <h4>{{ year }}</h4>
+            <div class="detail list-circle" [innerHTML]="detail"></div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+                    

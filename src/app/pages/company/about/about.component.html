@@ -1,0 +1,48 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+</div>
+<div class="about"
+    *ngIf="!loading && bgImg">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <div class="detail-about mt-md-5 mt-4 mb-5">
+        <div class="title text-md-left text-center mb-4">
+            <h4 class="c-blue">{{ dataAbout?.title }}</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="text-justify no-list" [innerHTML]="dataAbout?.content">
+        </div>
+    </div>
+    <div class="value">
+        <div class="title text-md-left text-center mb-4">
+            <h4 *ngIf="langTit === 'en'" class="c-blue">Our Value</h4>
+            <h4 *ngIf="langTit === 'id'" class="c-blue">Nilai</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="table-value text-justify">
+            <table class="w-100">
+                <tr class="border-bot">
+                    <td class="pr-3 w-100px"><h6 class="c-blue">{{ dataVision?.title }}</h6></td>
+                    <td class="list-circle" [innerHTML]="dataVision?.content"></td>
+                </tr>
+                <tr class="border-bot">
+                    <td class="pr-3 w-100px"><h6 class="c-blue">{{ dataMission?.title }}</h6></td>
+                    <td class="list-circle" [innerHTML]="dataMission?.content"></td>
+                </tr>
+                <tr class="border-bot">
+                    <td class="pr-3 w-100px"><h6 class="c-blue">{{ dataCulture?.title }}</h6></td>
+                    <td class="list-circle" [innerHTML]="dataCulture?.content"></td>
+                </tr>
+                <tr class="border-bot">
+                    <td class="pr-3 w-100px"><h6 class="c-blue">{{ dataMotto?.title }}</h6></td>
+                    <td class="list-circle" [innerHTML]="dataMotto?.content"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+     
+

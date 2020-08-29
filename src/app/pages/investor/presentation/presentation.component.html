@@ -1,0 +1,66 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="presentation"
+     *ngIf="!loading && bgImg && dataPresentation">
+     <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+     </div>
+    <div class="title text-md-left text-center my-sm-5 mt-4 mb-3">
+        <h4 class="c-blue">{{ titlePage }}</h4>
+        <hr class="yellow-border ml-md-0">
+    </div>
+    <!-- desktop -->
+    <div class="row file-row2 d-md-flex d-none">
+        <div class="col-sm-4 col-6 px-xl-4 re-fol" 
+            *ngFor="let prospec of dataPresentation
+            | paginate: { id: 'presentation', itemsPerPage: 3, currentPage:  pagePersentation}">
+            <app-list-report [dataReport]="prospec"></app-list-report>
+        </div>
+    </div>
+    <!-- mobile -->
+    <div class="row file-row2 d-md-none d-flex">
+        <div class="col-sm-4 col-6 px-xl-4 re-fol" 
+            *ngFor="let prospec of dataPresentation
+            | paginate: { id: 'presentation', itemsPerPage: 4, currentPage:  pagePersentation}">
+            <app-list-report [dataReport]="prospec"></app-list-report>
+        </div>
+    </div>
+    <pagination-template 
+        id="presentation"
+        #presen="paginationApi" 
+        (pageChange)="pagePersentation = $event" 
+        autoHide="true" 
+        maxSize="5">
+        <nav class="pt-sm-5 pt-4">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" 
+                    [class.disabled]="presen.isFirstPage()" 
+                    aria-disabled="true">
+                    <a class="page-link" (click)="presen.previous()">Prev</a>
+                </li>
+                <div *ngFor="let page of presen.pages" 
+                    [class.current]="presen.getCurrent() === page.value">
+                    <li class="page-item">
+                        <a class="page-link" 
+                        (click)="presen.setCurrent(page.value)"
+                            *ngIf="presen.getCurrent() !== page.value">
+                            <span>{{ page.label }}</span>
+                        </a>
+                    </li>
+                    <li class="page-item active" *ngIf="presen.getCurrent() === page.value">
+                        <a class="page-link" class="page-link">
+                            <span>{{ page.label }}</span>
+                        </a>
+                    </li>                        
+                </div>
+                <li class="page-item" 
+                    [class.disabled]="presen.isLastPage()" 
+                    aria-disabled="true">
+                    <a class="page-link" (click)="presen.next()">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </pagination-template>
+</div>

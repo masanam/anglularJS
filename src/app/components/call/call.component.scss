@@ -1,0 +1,87 @@
+.call-center{
+    position: fixed;
+    bottom: 0px;
+    border-radius: 25px 25px 0px 0px;
+    right: 8px;
+    z-index: 3;
+    background: white;
+    max-height: 40px;
+    transition: .5s linear;
+    box-shadow: 0px 2px 2px rgba(65, 78, 101, 0.1), 0px 4px 4px rgba(65, 78, 101, 0.1), 0px 6px 12px rgba(65, 78, 101, 0.1), 0px 12px 24px rgba(65, 78, 101, 0.1);
+    .open-call{
+        background: #005DA0;
+        border-radius: 25px 25px 0px 0px;
+        padding: 10px 25px;
+        text-align: center;
+        padding-top: 12px;
+        position: relative;
+        cursor: pointer;
+        color: white;
+        .text{
+            font-size: 0.85rem;
+            font-weight: 300;
+            padding-left: 10px;
+        }
+        .arr-drop{
+            background: #FAA61A;
+            padding: 5px 10px;
+            border-radius: 50%;
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 9pt;
+        }
+    }
+    .list-calls{
+        font-size: 0.85rem;
+        padding: 8px 15px;   
+        h6{
+            font-size: 0.9rem;
+        }
+        .no-cell{
+            padding: 8px 0px;
+        }
+        .wa:hover{
+            color: #FAA61A;
+        }
+    }
+    &.opening{
+        max-height: 100%;
+        .open-call{
+            .arr-drop{
+                i:before{
+                    transform: rotate(180deg);
+                    transition: .3s linear;
+                }
+            }
+        }
+    }
+}
+
+// Responsive
+
+@media only screen and (max-width: 767px){
+    .call-center{
+        .open-call{
+            padding: 8px 15px;
+            padding-top: 10px;
+            .text{
+                font-size: 0.82rem;
+            }
+            .arr-drop{
+                padding: 4px 9px;
+            }
+        }
+        .list-calls{
+            font-size: 0.8rem;
+            padding: 8px;   
+            h6{
+                font-size: 0.82rem;
+            }
+            .no-cell{
+                padding: 3px 0px;
+            }
+        }
+    }    
+}

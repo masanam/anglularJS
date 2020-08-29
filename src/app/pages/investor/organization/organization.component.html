@@ -1,0 +1,161 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="organization" *ngIf="!loading && bgImg && dataOrganization">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <div class="info-structure py-md-5 pb-5 pt-4">
+        <div class="title text-md-left text-center mb-5">
+            <h4 class="c-blue">{{ titlePage }}</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <!-- desktop -->
+        <div class="picture-struc d-md-block d-none">
+            <lib-ngx-image-zoom
+                [enableLens]="true"
+                lensHeight="130"
+                lensWidth="130"
+                [magnification]="0.3"
+                [thumbImage]="dataGraphic"
+            ></lib-ngx-image-zoom>
+        </div>
+        <!-- mobile -->
+        <div class="picture-struc d-md-none d-block">
+            <lib-ngx-image-zoom
+                [enableLens]="true"
+                lensHeight="60"
+                lensWidth="60"
+                [magnification]="0.2"
+                [thumbImage]="dataGraphic"
+            ></lib-ngx-image-zoom>
+        </div>
+    </div>
+    <div class="info-structure">
+        <div class="title text-md-left text-center">
+            <h4 *ngIf="langTit === 'en'" class="c-blue">Management Curriculum Vitae</h4>
+            <h4 *ngIf="langTit === 'id'" class="c-blue">Riwayat Hidup Manajemen</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="struic-table my-5" 
+            *ngFor="let profile of dataOrganization | 
+            paginate: { id: 'organization', itemsPerPage: 1, currentPage: pageOrganization }">
+            <div class="head">
+                <div class="category text-center">
+                    <h5 class="mb-0">{{ profile.category.title }}</h5>
+                </div>  
+                <div class="name py-3 c-blue">
+                    <h6>{{ profile.fullname }}</h6>
+                    <p class="mb-0"><i>{{ profile.position }}</i></p>
+                </div>
+            </div>
+            <table class="w-100">
+                <tr *ngIf="profile.citizen">
+                    <td class="title" *ngIf="langTit === 'en'">
+                        <b>Citizenship</b>
+                    </td>
+                    <td class="title" *ngIf="langTit === 'id'">
+                        <b>Kewarganegaraan</b>
+                    </td>
+                    <td class="no-list" [innerHTML]="profile.citizen"></td>
+                </tr>
+                <tr *ngIf="profile.age">
+                    <td class="title" *ngIf="langTit === 'en'">
+                        <b>Age</b>
+                    </td>
+                    <td class="title" *ngIf="langTit === 'id'">
+                        <b>Usia</b>
+                    </td>
+                    <td class="no-list">{{ profile.age }}</td>
+                </tr>
+                <tr *ngIf="profile.education">
+                    <td class="title" *ngIf="langTit === 'en'">
+                        <b>Educational Background</b>
+                    </td>
+                    <td class="title" *ngIf="langTit === 'id'">
+                        <b>Riwayat Pendidikan</b>
+                    </td>
+                    <td class="no-list" [innerHTML]="profile.education"></td>
+                </tr>
+                <tr *ngIf="profile.legal">
+                    <td class="title" *ngIf="langTit === 'en'">
+                        <b>Legal Basis for Appointment & Term of Office</b>
+                    </td>
+                    <td class="title" *ngIf="langTit === 'id'">
+                        <b>Dasar Hukum Penunjukan dan Periode Jabatan</b>
+                    </td>
+                    <td class="no-list" [innerHTML]="profile.legal"></td>
+                </tr>
+                <tr *ngIf="profile.experience">
+                    <td class="title" *ngIf="langTit === 'en'">
+                        <b>Working Experiences</b>
+                    </td>
+                    <td class="title" *ngIf="langTit === 'id'">
+                        <b>Pengalaman Kerja</b>
+                    </td>
+                    <td class="no-list" [innerHTML]="profile.experience"></td>
+                </tr>
+                <tr *ngIf="profile.concurrent">
+                    <td class="title" *ngIf="langTit === 'en'">
+                        <b>Concurrent Position</b>
+                    </td>
+                    <td class="title" *ngIf="langTit === 'id'">
+                        <b>Rangkap Jabatan</b>
+                    </td>
+                    <td class="no-list" [innerHTML]="profile.concurrent"></td>
+                </tr>
+                <tr *ngIf="profile.affiliate">
+                    <td class="title" *ngIf="langTit === 'en'">
+                        <b>Affiliated Relationship</b>
+                    </td>
+                    <td class="title" *ngIf="langTit === 'id'">
+                        <b>Hubungan Afiliasi</b>
+                    </td>
+                    <td class="no-list" [innerHTML]="profile.affiliate"></td>
+                </tr>
+            </table>
+        </div>
+        <pagination-template 
+            id="organization" 
+            #organ="paginationApi" 
+            (pageChange)="pageOrganization = $event" 
+            autoHide="true"
+            maxSize="5">
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" 
+                        [class.disabled]="organ.isFirstPage()" 
+                        aria-disabled="true">
+                        <a class="page-link" (click)="organ.previous()">Prev</a>
+                    </li>
+                    <div *ngFor="let page of organ.pages" 
+                        [class.current]="organ.getCurrent() === page.value">
+                        <li class="page-item">
+                            <a class="page-link" 
+                            (click)="organ.setCurrent(page.value)" 
+                            *ngIf="organ.getCurrent() !== page.value">
+                                <span>{{ page.label }}</span>
+                            </a>
+                        </li>
+                        <li class="page-item active" *ngIf="organ.getCurrent() === page.value">
+                            <a class="page-link" class="page-link">
+                                <span>{{ page.label }}</span>
+                            </a>
+                        </li>                        
+                    </div>
+                    <li class="page-item" 
+                        [class.disabled]="organ.isLastPage()"
+                        aria-disabled="true">
+                        <a class="page-link" (click)="organ.next()">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </pagination-template>
+    </div>
+</div>
+
+        
+
+
+

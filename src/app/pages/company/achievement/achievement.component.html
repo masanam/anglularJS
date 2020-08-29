@@ -1,0 +1,179 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+</div>
+<div class="achiev-certifi"
+    *ngIf="!loading && bgImg && dataAchivCorporate && dataAchivBrand && dataCertification">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <!-- achievement -->
+    <div class="achiev mt-md-5 mt-4">
+        <div class="title text-md-left text-center mb-3">
+            <h4 *ngIf="langTit === 'en'" class="c-blue">Achievement</h4>
+            <h4 *ngIf="langTit === 'id'" class="c-blue">Prestasi</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <!-- corporate -->
+        <div class="groups py-4">
+            <h5 class="c-blue mb-3">{{ detailCorporate.title }}</h5>
+            <div class="no-list text-justify" [innerHTML]="detailCorporate.content"></div>
+            <div class="row my-sm-4 my-3 pb-2">
+                <div class="col-sm-4 px-sm-3 py-sm-0 py-3 px-5 pad" 
+                     *ngFor="let achievement of dataAchivCorporate 
+                     | paginate: { id: 'corporate', itemsPerPage: 3, currentPage: pageCorporate }" 
+                    (click)="showModal(achievement)">
+                    <app-list-achiv [dataAchiv]="achievement"></app-list-achiv>
+                </div>
+            </div>
+            <pagination-template 
+                id="corporate" 
+                #corporate="paginationApi" 
+                (pageChange)="pageCorporate = $event" 
+                autoHide="true" 
+                maxSize="5">
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" 
+                            [class.disabled]="corporate.isFirstPage()" 
+                            aria-disabled="true">
+                            <a class="page-link" (click)="corporate.previous()">Prev</a>
+                        </li>
+                        <div *ngFor="let page of corporate.pages" 
+                            [class.current]="corporate.getCurrent() === page.value">
+                            <li class="page-item">
+                                <a class="page-link" 
+                                   (click)="corporate.setCurrent(page.value)"
+                                    *ngIf="corporate.getCurrent() !== page.value">
+                                    <span>{{ page.label }}</span>
+                                </a>
+                            </li>
+                            <li class="page-item active" *ngIf="corporate.getCurrent() === page.value">
+                                <a class="page-link" class="page-link">
+                                    <span>{{ page.label }}</span>
+                                </a>
+                            </li>                        
+                        </div>
+                        <li class="page-item" 
+                            [class.disabled]="corporate.isLastPage()" 
+                            aria-disabled="true">
+                            <a class="page-link" (click)="corporate.next()">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </pagination-template>
+        </div>
+        <!-- brands -->
+        <div class="groups py-sm-5 py-4">
+            <h5 class="c-blue mb-3">{{ detailBrand.title }}</h5>
+            <div class="no-list text-justify" [innerHTML]="detailBrand.content"></div>
+            <div class="row my-sm-4 my-3 pb-2">
+                <div class="col-sm-4 px-sm-3 py-sm-0 py-3 px-5 pad" 
+                    *ngFor="let achievement of dataAchivBrand 
+                    | paginate: { id: 'brand', itemsPerPage: 3, currentPage: pageBrand }" 
+                    (click)="showModal(achievement)">
+                    <app-list-achiv [dataAchiv]="achievement"></app-list-achiv>
+                </div>
+            </div>
+            <pagination-template 
+                id="brand" 
+                #brand="paginationApi" 
+                (pageChange)="pageBrand = $event" 
+                autoHide="true"
+                maxSize="5">
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" 
+                            [class.disabled]="brand.isFirstPage()" 
+                            aria-disabled="true">
+                            <a class="page-link" (click)="brand.previous()">Prev</a>
+                        </li>
+                        <div *ngFor="let page of brand.pages" 
+                            [class.current]="brand.getCurrent() === page.value">
+                            <li class="page-item">
+                                <a class="page-link" 
+                                   (click)="brand.setCurrent(page.value)" 
+                                   *ngIf="brand.getCurrent() !== page.value">
+                                    <span>{{ page.label }}</span>
+                                </a>
+                            </li>
+                            <li class="page-item active" *ngIf="brand.getCurrent() === page.value">
+                                <a class="page-link" class="page-link">
+                                    <span>{{ page.label }}</span>
+                                </a>
+                            </li>                        
+                        </div>
+                        <li class="page-item" 
+                            [class.disabled]="brand.isLastPage()"
+                            aria-disabled="true">
+                            <a class="page-link" (click)="brand.next()">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </pagination-template>
+        </div>
+    </div>
+    <!-- certification -->
+    <div class="certifi pt-4 pb-3">
+        <div class="title text-md-left text-center mb-5">
+            <h4 *ngIf="langTit === 'en'" class="c-blue">Certification</h4>
+            <h4 *ngIf="langTit === 'id'" class="c-blue">Sertifikat</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="full-pad15">
+            <table class="w-100 table-ver1">
+                <tr class="head" *ngIf="langTit === 'en'">
+                    <th>Certification</th>
+                    <th>Issuer</th>
+                </tr>
+                <tr class="head" *ngIf="langTit === 'id'">
+                    <th>Sertifikat</th>
+                    <th>Penerbit</th>
+                </tr>
+                <tr class="data" *ngFor="let certification of dataCertification">
+                    <td>{{ certification.title }}</td>
+                    <td>{{ certification.issuer }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!-- modal achievement -->
+    <div *ngIf="isModalShown" 
+        [config]="{ show: true }" 
+        (onHidden)="onHidden()" 
+        bsModal 
+        #autoShownModal="bs-modal"
+        class="modal fade modal-achiv"
+        tabindex="-1" 
+        role="dialog" 
+        aria-labelledby="dialog-auto-name">
+        <div class="modal-dialog modal-lg d-block">
+            <div class="modal-content">
+                <div class="modal-x" aria-label="Close" (click)="hideModal()">
+                    <span aria-hidden="true"><i class="icon ion-ios-close"></i></span>
+                </div>
+                <div class="modal-body">
+                    <div class="bg-archiv" [ngStyle]="{'background-image' : 'url('+ apiAsset + modalImg +')'}">
+                    </div>
+                    <div class="detail pb-5 px-lg-5 px-sm-4 px-3" [ngClass]="{'active': fullHeight === true}">
+                        <div class="title mb-4">
+                            <h5 class="c-blue">{{ modalTitle }}</h5>
+                            <hr class="yellow-border ml-0">
+                        </div>
+                        <div class="list-circle" [innerHTML]="modalDetail"></div>
+                        <div class="read-more">
+                            <h6 (click)="fullRead()">{{ textRead }}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+
+.about{
+    .table-value{
+        td {
+            padding: 15px 0px;
+        }
+        td.w-100px{
+            vertical-align: text-top;
+        }
+        .border-bot {
+            border-bottom: 1px solid #E5E5E5;
+            &:last-child{
+                border-bottom: none;
+            }
+        }
+    }
+    .w-100px{
+        width: 100px;
+    }
+}
+

@@ -1,0 +1,29 @@
+.glance-detail{
+    .bg-company {
+        height: 330px;
+        width: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}
+
+
+// Responsive
+
+@media only screen and (max-width: 991px){
+    .glance-detail{
+        .bg-company {
+            height: 290px;
+        }
+    }
+}
+
+
+@media only screen and (max-width: 575px){
+    .glance-detail{
+        .bg-company {
+            height: 240px;
+        }
+    }
+}

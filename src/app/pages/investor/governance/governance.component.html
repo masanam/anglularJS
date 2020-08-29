@@ -1,0 +1,71 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="governance" 
+    *ngIf="!loading && bgImg && dataCharter && dataRisk">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <div class="charter mt-md-5 mt-4">
+        <div class="title text-md-left text-center mb-4">
+            <h4 *ngIf="langTit === 'en'" class="c-blue">Charter and Guideline</h4>
+            <h4 *ngIf="langTit === 'id'" class="c-blue">Piagam & Pedoman</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="full-pad15 pt-2">
+            <table class="w-100 table-ver1 text-center">
+                <tr class="head" *ngIf="langTit === 'en'">
+                    <th>Description</th>
+                    <th>Download</th>
+                </tr>
+                <tr class="head" *ngIf="langTit === 'id'">
+                    <th>Deskripsi</th>
+                    <th>Unduh</th>
+                </tr>
+                <tr class="data" *ngFor="let charter of dataCharter">
+                    <td><b>{{ charter.title }}</b></td>
+                    <td><a [href]="apiAsset + charter.filename" target="_blank" download>
+                            <img src="../../../assets/img/icons/down-icon.svg" alt="">
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!-- <div class="code my-5">
+        <div class="title text-md-left text-center mb-4">
+            <h4 class="c-blue">Code of Conduct</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="deskripsi text-justify">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lobortis felis risus, sit amet laoreet massa porttitor a. Nam eu justo sed massa finibus porta. Aenean consectetur condimentum laoreet. Donec facilisis a turpis nec accumsan. Vivamus imperdiet ipsum at sagittis accumsan. Praesent sit amet porttitor nisl. Maecenas tempus rutrum mauris, vitae</p>
+        </div>
+    </div> -->
+    <div class="risk mt-5 mb-3">
+        <div class="title text-md-left text-center mb-4">
+            <h4 *ngIf="langTit === 'en'" class="c-blue">Risk Management</h4>
+            <h4 *ngIf="langTit === 'id'" class="c-blue">Manajemen Resiko</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <!-- <div class="deskripsi text-justify">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lobortis felis risus, sit amet laoreet massa porttitor a. Nam eu justo sed massa finibus porta. Aenean consectetur condimentum laoreet. Donec facilisis a turpis nec accumsan. Vivamus imperdiet ipsum at sagittis accumsan. Praesent sit amet porttitor nisl. Maecenas tempus rutrum mauris, vitae.</p>
+        </div> -->
+        <div class="risk-doc">
+            <div class="row file-row1">
+                <div class="col-sm-4 col-6 pad" 
+                    *ngFor="let article of dataRisk | slice:0:3; let i = index">
+                    <app-files [dataFiles]="article"></app-files>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        
+
+
+
+
+
+

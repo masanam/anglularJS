@@ -1,0 +1,96 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="search-big mt-3" *ngIf="!loading">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-11 mx-auto px-lg-5">
+              <!-- brands -->
+               <div class="search-brands" *ngIf="dataBrand">
+                    <div *ngFor="let brand of dataBrand" class="wrap py-3">
+                        <h5 class="c-blue">{{ brand.title }}</h5>
+                        <div class="summary" [innerHTML]="brand.summary"></div>
+                        <a [routerLink]="'/'+lang+'/brands/'+brand.kategori+'/'+brand.seotitle" class="read-link">Read More...</a>
+                    </div>
+               </div>
+               <!-- type brands -->
+               <div class="search-type" *ngIf="dataType">
+                    <div *ngFor="let type of dataType" class="wrap py-3">
+                        <h5 class="c-blue">{{ type.title }}</h5>
+                        <div class="summary" [innerHTML]="type.description"></div>
+                        <a [routerLink]="'/'+lang+'/brands/'+type.slug" class="read-link">Read More...</a>
+                    </div>
+                </div>
+                <!-- articles -->
+                <div class="search-content" *ngIf="dataContent">
+                    <div *ngFor="let content of dataContent" class="wrap py-3">
+                        <h5 class="c-blue">{{ content.title }}</h5>
+                        <div class="summary" [innerHTML]="content.summary"></div>
+                        <a *ngIf="content.kategori != 'Press Release' && content.kategori != 'Media Coverage'"
+                            routerLink="/{{lang}}/news-n-events/{{ content.kategori | lowercase }}/{{ content.seotitle }}" 
+                            class="read-link">
+                            Read More...
+                        </a>
+                        <a *ngIf="content.kategori === 'Press Release' || content.kategori === 'Media Coverage'"
+                            routerLink="/{{lang}}/investor/announcement/{{ content.seotitle }}" 
+                            class="read-link">
+                            Read More...
+                        </a>
+                    </div>
+                </div>
+                <!-- products -->
+                <div class="search-product" *ngIf="dataProduct">
+                    <div *ngFor="let prod of dataProduct" class="wrap py-3">
+                        <h5 class="c-blue">{{ prod.title }}</h5>
+                        <div class="summary" [innerHTML]="prod.content"></div>
+                        <a [routerLink]="'/'+lang+'/brands/'+prod.kategori+'/'+prod.brand+'/'+prod.seotitle" class="read-link">Read More...</a>
+                    </div>
+                </div>
+                <!-- glance -->
+                <div class="search-group" *ngIf="dataGroup">
+                    <div *ngFor="let group of dataGroup" class="wrap py-3">
+                        <h5 class="c-blue">{{ group.title }}</h5>
+                        <div class="summary" [innerHTML]="group.summary"></div>
+                        <a [routerLink]="'/'+lang+'/company/'+'/kino-at-a-glance/'+group.seotitle" class="read-link">Read More...</a>
+                    </div>
+                </div>
+                <!-- careers -->
+                <div class="search-career" *ngIf="dataCareer">
+                    <div *ngFor="let career of dataCareer" class="wrap py-3">
+                        <h5 class="c-blue">{{ career.title }}</h5>
+                        <div class="summary" [innerHTML]="career.summary"></div>
+                        <!-- <a routerLink="" class="read-link">Read More...</a> -->
+                    </div>
+                </div>
+                <!-- testimony -->
+                <div class="search-testimony" *ngIf="dataTestimony">
+                    <div *ngFor="let testimony of dataTestimony" class="wrap py-3">
+                        <h5 class="c-blue">{{ testimony.title }}</h5>
+                        <div class="summary" [innerHTML]="testimony.summary"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="not-find text-center" 
+        *ngIf="
+            dataBrand.length === 0 && 
+            dataTestimony.length === 0 &&
+            dataType.length === 0  && 
+            dataContent.length === 0 && 
+            dataProduct.length === 0 && 
+            dataGroup.length === 0 && 
+            dataCareer.length === 0">
+        <h5 class="c-blue">{{ dataNotFound }}</h5>
+    </div>
+</div>
+
+
+        
+
+
+
+
+
+
+

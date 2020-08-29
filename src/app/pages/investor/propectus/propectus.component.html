@@ -1,0 +1,57 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="prospectus"
+     *ngIf="!loading && bgImg && dataProspectus">
+     <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+     </div>
+    <div class="title text-md-left text-center mt-md-5 my-4">
+        <h4 class="c-blue">{{ titlePage }}</h4>
+        <hr class="yellow-border ml-md-0">
+    </div>
+    <div class="row file-row1">
+        <div class="col-sm-4 col-6 pad" 
+            *ngFor="let prospec of dataProspectus
+            | paginate: { id: 'prospectus', itemsPerPage: 6, currentPage: pageProspectus}">
+            <app-files [dataFiles]="prospec"></app-files>
+        </div>
+    </div>
+    <pagination-template 
+        id="prospectus"
+        #prosp="paginationApi" 
+        (pageChange)="pageProspectus = $event" 
+        autoHide="true" 
+        maxSize="5">
+        <nav class="pt-5">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" 
+                    [class.disabled]="prosp.isFirstPage()" 
+                    aria-disabled="true">
+                    <a class="page-link" (click)="prosp.previous()">Prev</a>
+                </li>
+                <div *ngFor="let page of prosp.pages" 
+                    [class.current]="prosp.getCurrent() === page.value">
+                    <li class="page-item">
+                        <a class="page-link" 
+                        (click)="prosp.setCurrent(page.value)"
+                            *ngIf="prosp.getCurrent() !== page.value">
+                            <span>{{ page.label }}</span>
+                        </a>
+                    </li>
+                    <li class="page-item active" *ngIf="prosp.getCurrent() === page.value">
+                        <a class="page-link" class="page-link">
+                            <span>{{ page.label }}</span>
+                        </a>
+                    </li>                        
+                </div>
+                <li class="page-item" 
+                    [class.disabled]="prosp.isLastPage()" 
+                    aria-disabled="true">
+                    <a class="page-link" (click)="prosp.next()">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </pagination-template>
+</div>

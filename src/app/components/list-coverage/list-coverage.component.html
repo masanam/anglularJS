@@ -1,0 +1,11 @@
+
+<a [routerLink]="'/'+langNow+'/investor/announcement/'+dataList.seotitle" class="w-100 coverage d-sm-flex align-items-center">
+    <div class="img">
+        <img [src]="apiAsset + dataList.picture" [alt]="dataList.title" class="w-100">
+    </div>
+    <div class="detail mt-sm-0 mt-3">
+        <h6 class="c-blue">{{ dataList.title }}</h6>
+        <p class="date">{{ dataList.published_at | date:"dd/MM/yyyy"}}</p>
+        <div class="mt-1 text-justify" [innerHTML]="dataList.summary"></div>
+    </div>
+</a>

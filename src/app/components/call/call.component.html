@@ -1,0 +1,40 @@
+<div class="call-center"  [ngClass]="{'opening': openCall === true}">
+    <div class="open-call" (click)="openCall = !openCall">
+        <img class="icon-call" src="../../../assets/img/icons/icon-telephone2.svg" alt="">
+        <span class="text">Call Center</span>
+        <span class="arr-drop"><i class="icon ion-ios-arrow-down"></i></span>
+    </div>
+    <div class="list-calls">
+        <div class="no-cell">
+            <h6 *ngIf="langCall === 'en'">
+                <span class="pr-1"><i class="icon ion-ios-call"></i></span> 
+                Toll Free
+            </h6>
+            <h6 *ngIf="langCall === 'id'">
+                <span class="pr-1"><i class="icon ion-ios-call"></i></span> 
+                Bebas Pulsa
+            </h6>
+            <p>0800-100-5466</p>
+        </div>
+        <div class="no-cell">
+            <h6 *ngIf="langCall === 'en'">
+                <span class="pr-1"><i class="icon ion-md-phone-portrait"></i></span> 
+                Paid Line
+            </h6>
+            <h6 *ngIf="langCall === 'id'">
+                <span class="pr-1"><i class="icon ion-md-phone-portrait"></i></span> 
+                Pulsa Bayar
+            </h6>
+            <p>021-8082-1166</p>
+        </div>
+        <div class="no-cell">
+            <h6> <span class="pr-1"><i class="icon ion-logo-whatsapp"></i></span> 
+                 Whatsapp
+            </h6>
+            <a target="_blank" class="wa" href="https://api.whatsapp.com/send?phone=6281113110900">
+                0811-1311-0900
+            </a>
+        </div>
+    </div>
+</div>
+

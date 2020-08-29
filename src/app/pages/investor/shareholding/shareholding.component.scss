@@ -1,0 +1,43 @@
+.shareholding{
+    table{
+        border: 1px solid black;
+        text-align: center;
+    }
+    tr:last-child{
+        font-weight: 600;
+    }
+    th, td{
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        padding: 8px 10px;
+        &:last-child{
+            border-left: initial;
+        }
+    }
+    .de-komi{
+        tr:last-child{
+            font-weight: 300;
+        }
+    }
+    
+}
+
+// Responsive
+
+@media only screen and (max-width: 767px){
+    .shareholding{
+        th, td{
+            padding: 8px;
+        }
+        th{
+            font-size: 0.8rem;
+        }
+        td{
+            font-size: 0.7rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 499px){
+
+}

@@ -1,0 +1,29 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="terms" *ngIf="!loading && detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 px-lg-5">
+                <div class="title text-center my-5" *ngIf="title">
+                    <h4 class="c-blue">{{ title }}</h4>
+                    <hr class="yellow-border">
+                </div>
+                <div class="detail" [innerHTML]="detail">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+

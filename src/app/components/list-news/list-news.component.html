@@ -1,0 +1,9 @@
+<a routerLink="{{ data.seotitle }}" class="d-block news">
+    <div class="thumb">
+        <img [src]="apiAsset + data.picture" [alt]="data.title" class="w-100">
+    </div>
+    <div class="detail text-justify pt-3">
+        <h6 class="c-blue title">{{data.title}}</h6>
+        <div class="sum" [innerHTML]="data.summary"></div>
+    </div>
+</a>

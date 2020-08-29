@@ -1,0 +1,23 @@
+@media only screen and (min-width: 992px){
+    .prospectus{
+        .pad{
+            padding: 1.2rem 1.5rem;
+        }
+        .file-row1{
+            margin-left: -1.5rem;
+            margin-right: -1.5rem;
+        }
+    }
+}
+
+@media only screen and (min-width: 1200px){
+    .prospectus{
+        .pad{
+            padding: 1.2rem 2.3rem;
+        }
+        .file-row1{
+            margin-left: -2.3rem;
+            margin-right: -2.3rem;
+        }
+    }
+}

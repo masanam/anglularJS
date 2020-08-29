@@ -1,0 +1,52 @@
+.corporate-info{
+    .list-advisor{
+        .title{
+            border-bottom: 1px solid #005DA0;
+            position: relative;
+            font-weight: 400;
+            padding-right: 75px;
+            &::before{
+                content: 'Read More';
+                position: absolute;
+                font-size: 0.9rem;
+                right: 0px;
+                top: 50%;
+                transform: translateY(-50%);
+                color:  #FAA419;
+            }
+        }
+        .panel-open{
+            .title{
+                &::before{
+                    content: 'Show Less';
+                }
+            }
+        }
+    }
+}
+
+// Responsive
+
+@media only screen and (min-width: 992px){
+    .corporate-info{
+        .file-row1{
+            margin-left: -1.5rem;
+            margin-right: -1.5rem;
+            .pad{
+                padding: 0px 1.5rem;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1200px){
+    .corporate-info{
+        .file-row1{
+            margin-left: -2.3rem;
+            margin-right: -2.3rem;
+            .pad{
+                padding: 0px 2.3rem;
+            }
+        }
+    }
+}

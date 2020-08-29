@@ -1,0 +1,41 @@
+
+<div class="w-100 list-brands d-sm-flex align-items-center">
+    <div class="img">
+        <img [src]="apiAsset + dataList.picture" [alt]="dataList.title" [style.width]="widthImg">
+    </div>
+    <div class="detail mt-sm-0 mt-4">
+        <!-- title  -->
+        <h6 class="title"
+            *ngIf="latest === false" 
+            [ngClass]="{'text-uppercase': uppercase === true }" 
+            [style.color]="color">
+            {{ dataList.title }}
+        </h6>
+        <!-- title page latest innovations -->
+        <h6 class="title" 
+           *ngIf="latest === true" 
+            [ngClass]="{'text-uppercase': uppercase === true }" 
+            [style.color]="color">
+            {{ titleCat }} {{ dataList.title }}
+        </h6>
+        <!-- detail -->
+        <div class="text-justify sum my-3"
+            [innerHTML]="dataList.summary">
+        </div>
+        <div class="read-more">
+            <!-- read more -->
+            <a *ngIf="latest === false" 
+                [routerLink]="dataList.seotitle" 
+                class="read-link">
+                Read More...
+            </a>
+            <!-- read more latest innovation -->
+            <a *ngIf="latest === true" 
+                [routerLink]="'/'+lgNow+'/brands/'+dataList.kategori+'/'+dataList.brand.seotitle+'/'+dataList.seotitle"
+                class="read-link">
+                Read More...
+            </a>
+        </div>
+    </div>
+</div>
+

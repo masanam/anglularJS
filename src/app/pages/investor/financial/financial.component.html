@@ -1,0 +1,57 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="financial"
+     *ngIf="!loading && bgImg && dataFinancial">
+     <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+     </div>
+    <div class="title text-md-left text-center mt-md-5 my-4">
+        <h4 class="c-blue">{{ titlePage }}</h4>
+        <hr class="yellow-border ml-md-0">
+    </div>
+    <div class="row file-row1">
+        <div class="col-sm-4 col-6 pad" 
+            *ngFor="let finan of  dataFinancial
+            | paginate: { id: 'finance', itemsPerPage: 6, currentPage: pageFinancial}">
+            <app-files [dataFiles]="finan"></app-files>
+        </div>
+    </div>
+    <pagination-template 
+        id="finance"
+        #finan="paginationApi" 
+        (pageChange)="pageFinancial = $event" 
+        autoHide="true" 
+        maxSize="5">
+        <nav class="pt-5">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" 
+                    [class.disabled]="finan.isFirstPage()" 
+                    aria-disabled="true">
+                    <a class="page-link" (click)="finan.previous()">Prev</a>
+                </li>
+                <div *ngFor="let page of finan.pages" 
+                    [class.current]="finan.getCurrent() === page.value">
+                    <li class="page-item">
+                        <a class="page-link" 
+                        (click)="finan.setCurrent(page.value)"
+                            *ngIf="finan.getCurrent() !== page.value">
+                            <span>{{ page.label }}</span>
+                        </a>
+                    </li>
+                    <li class="page-item active" *ngIf="finan.getCurrent() === page.value">
+                        <a class="page-link" class="page-link">
+                            <span>{{ page.label }}</span>
+                        </a>
+                    </li>                        
+                </div>
+                <li class="page-item" 
+                    [class.disabled]="finan.isLastPage()" 
+                    aria-disabled="true">
+                    <a class="page-link" (click)="finan.next()">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </pagination-template>
+</div>

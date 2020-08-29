@@ -1,0 +1,169 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="contact" *ngIf="!loading && bgImg">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <div class="row mt-md-5 mt-4 mb-lg-3">
+        <div class="col-lg-4">
+            <div class="title text-md-left text-center mb-4">
+                <h4 class="c-blue">{{ titlePage }}</h4>
+                <hr class="yellow-border ml-md-0">
+            </div>
+            <div class="address">
+                <h6 *ngIf="langTit === 'en'" class="c-blue">Address:</h6>
+                <h6 *ngIf="langTit === 'id'" class="c-blue">Alamat:</h6>
+                <p>
+                    Kino Tower 17<sup>th</sup> Floor <br> Jl. Jalur Sutera Boulevard No.01 <br> Alam Sutera, Kota Tangerang, 15143 <br> Indonesia
+                </p>
+            </div>
+            <div class="phone my-4">
+                <h6 *ngIf="langTit === 'en'" class="c-blue">Phone Numbers:</h6>
+                <h6 *ngIf="langTit === 'id'" class="c-blue">Nomor Telepon:</h6>
+                <p>(62-21) 80821100</p>
+            </div>
+            <div class="fax">
+                <h6 class="c-blue">Fax:</h6>
+                <p>(62-21) 80821123</p>
+            </div>
+        </div>
+        <div class="col-lg-8 pt-3">
+            <p *ngIf="langTit === 'en'" class="c-blue mb-3">Please Submit Your Question Using The Form Below</p>
+            <p *ngIf="langTit === 'id'" class="c-blue mb-3">Silakan Kirimkan Pertanyaan Anda Melalui Form Di Bawah Ini</p>
+            <form  #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" novalidate>
+                <div class="row">
+                    <div class="col-md-6 pr-lg-1">
+                        <div class="form-group">
+                            <input type="text" 
+                                    class="form-control" 
+                                    id="name"
+                                    placeholder="Name" 
+                                    required 
+                                    #name="ngModel" 
+                                    [class.is-invalid]="name.invalid && name.touched" 
+                                    name="name" 
+                                    ngModel>
+                            <small class="text-danger" 
+                                 [class.d-none]="name.valid || name.untouched">
+                                 Name is required
+                            </small>
+                          </div>
+                    </div>
+                    <div class="col-md-6 pl-lg-1">
+                        <div class="form-group">
+                            <input type="email" 
+                                    class="form-control" 
+                                    id="email" 
+                                    placeholder="Email" 
+                                    required
+                                    name="email" 
+                                    #email="ngModel" 
+                                    [class.is-invalid]="email.invalid && email.touched" 
+                                    ngModel>
+                            <small class="text-danger" 
+                                  [class.d-none]="email.valid || email.untouched">
+                                  Email and use "@" is required
+                            </small>
+                         </div>
+                    </div>
+                    <div class="col-md-6 pr-lg-1">
+                        <div class="form-group">
+                            <input type="number" 
+                                    class="form-control" 
+                                    id="number" 
+                                    placeholder="Phone" 
+                                    required 
+                                    #phone="ngModel" 
+                                    [class.is-invalid]="phone.invalid && phone.touched" 
+                                    name="phone" 
+                                    ngModel>
+                            <small class="text-danger" 
+                                [class.d-none]="phone.valid || phone.untouched">
+                                Phone with number only is required
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pl-lg-1">
+                        <div class="form-group">
+                            <input type="text" 
+                                    class="form-control" 
+                                    id="country" 
+                                    placeholder="country" 
+                                    required 
+                                    #country="ngModel" 
+                                    [class.is-invalid]="country.invalid && country.touched" 
+                                    name="Country" 
+                                    ngModel>
+                            <small class="text-danger" 
+                                 [class.d-none]="country.valid || country.untouched">
+                                 Country is required
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input type="text" 
+                                    class="form-control" 
+                                    id="subject" 
+                                    placeholder="Subject" 
+                                    required 
+                                    #title="ngModel"
+                                    [class.is-invalid]="title.invalid && title.touched" 
+                                    name="title" 
+                                    ngModel>
+                            <small class="text-danger" 
+                                   [class.d-none]="title.valid || title.untouched">
+                                   Subject is required
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <textarea class="form-control" 
+                                     placeholder="Message" 
+                                     id="massage" 
+                                     rows="10" 
+                                     required 
+                                     #content="ngModel" 
+                                     [class.is-invalid]="content.invalid && content.touched" 
+                                     name="content" 
+                                     ngModel>
+                            </textarea>
+                             <small class="text-danger" 
+                                    [class.d-none]="content.valid || content.untouched">
+                                    Message is required
+                            </small>
+                         </div>
+                    </div>
+                    <div class="col-lg-12 mt-4 button-submit text-center">
+                        <button  *ngIf="!send" class="btn blue-btn" [disabled]="contactForm.form.invalid" type="submit">SEND</button>
+                        <button *ngIf="send" class="btn blue-btn" type="button" disabled>
+                            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+                    </div>
+                    <swal
+                        #errorSwal
+                        title="failed, please try again"
+                        icon="error">
+                    </swal>
+                    <swal
+                        #successSwal
+                        title="success"
+                        icon="success">
+                    </swal>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+        
+
+
+
+
+
+

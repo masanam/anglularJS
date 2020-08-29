@@ -1,0 +1,43 @@
+.info-thumbnail {
+    display: block;
+    transform: none;
+    transition: transform .3s linear;
+    .bg-date{
+        color: white;
+        text-align: center;
+        background: #005DA0;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        p{
+            margin-bottom: 0px;
+        }
+        p.date {
+            font-size: 18pt;
+            line-height: 26px;
+        }
+        p.month, p.year {
+            font-size: 12pt;
+        }
+    }
+    .detail{
+        p{
+            line-height: 18px;
+        }
+        .sum{
+            font-size: 0.9rem;
+        }
+    }
+    &:hover{
+        transform: scale(1.02);
+        .detail{
+            h6.title{
+              color: #FAA61A;
+              transition: color .3s linear;
+            }
+        }
+    }
+}
+

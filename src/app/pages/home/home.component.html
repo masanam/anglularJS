@@ -1,0 +1,186 @@
+<div class="overlay-loading" *ngIf="loading">
+    <img src="../../../assets/img/part1-load.png" alt="" class="logo-1">
+    <img src="../../../assets/img/part2-load.png" alt="" class="logo-2">
+</div> 
+<div class="home"
+    *ngIf="!loading && dataBrands && dataSlider && dataTeam && dataNews && dataPress">
+    <!-- motto  -->
+    <div class="slider-label" >
+        <carousel [isAnimated]="true">
+            <slide *ngFor="let slider of dataSlider">
+                <img [src]="apiAsset + slider.picture" 
+                    [alt]="slider.title" 
+                    style="display: block; width: 100%;">
+                <div class="carousel-caption">
+                    <h5 class="text-uppercase c-blue" [innerHTML]="slider.title"></h5>
+                    <div class="yellow-border"></div>
+                    <p class="mt-2">{{ slider.description }}</p>
+                </div>
+            </slide>
+        </carousel>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 px-lg-5">
+                <!-- desktop glance -->
+                <div class="slider-logo d-md-block d-none py-5"
+                    data-aos="flip-up" 
+                    data-aos-duration="600">
+                    <div class="row mx-0 align-items-center justify-content-center">
+                        <div class="col-md logoCom" 
+                            *ngFor='let company of dataCompany; let i = index'>
+                            <a [routerLink]="'/'+lang+'/company/kino-at-a-glance/'+company.seotitle">
+                                <img width="100%" 
+                                    [src]="apiAsset + company.picture"
+                                    [alt]="company.title">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- mobile glance -->
+                <div class="slider-logo d-md-none d-block pt-3 pb-5">
+                    <owl-carousel-o [options]="customOptionsLogo">
+                        <ng-container *ngFor='let company of dataCompany; let i = index'>
+                            <ng-template carouselSlide>
+                                <a [routerLink]="'/'+lang+'/company/kino-at-a-glance/'+company.seotitle">
+                                    <img width="100%" 
+                                        [src]="apiAsset + company.picture"
+                                        [alt]="company.title">
+                                </a>
+                            </ng-template>
+                        </ng-container>
+                    </owl-carousel-o>
+                </div>
+                <!-- our brands -->
+                <div class="slider-ourbrands">
+                    <div class="title text-center pb-3">
+                        <h4 *ngIf="lang === 'en'" class="c-blue">Our Brands</h4>
+                        <h4 *ngIf="lang === 'id'" class="c-blue">Produk Kami</h4>
+                        <hr class="yellow-border">
+                    </div>
+                    <owl-carousel-o [options]="customOptionsBrands">
+                        <ng-container *ngFor='let brand of dataBrands; let i = index'>
+                            <ng-template carouselSlide>
+                                <a [routerLink]="'/'+lang+'/brands/'+brand.slug">
+                                    <img [src]="apiAsset + brand.picture" [alt]="brand.alt">
+                                    <p class="mt-2 b-tit text-center"><b>{{brand.title}}</b></p>
+                                </a>
+                            </ng-template>
+                        </ng-container>
+                    </owl-carousel-o>
+                </div>
+                <!-- join our team -->
+                <div class="join-team">
+                    <div class="row mx-lg-0">
+                        <div class="col-md-6 order-md-1 order-2">
+                            <div class="title mt-md-0 my-4 text-md-left text-center">
+                                <h4 *ngIf="lang === 'en'" class="c-blue">Join Our Team Now</h4>
+                                <h4 *ngIf="lang === 'id'" class="c-blue">Bergabunglah Bersama Kami</h4>
+                                <hr class="yellow-border ml-md-0">
+                            </div>
+                            <div class="text px-md-0 px-4">
+                                <h6 class="c-blue">{{ dataTeam.title }}</h6>
+                                <div class="no-list" [innerHTML]="dataTeam.summary"></div>
+                                <div class="text-left">
+                                    <a [routerLink]="'/'+lang+'/careers/join-us'" 
+                                       class="read-link mt-3">
+                                        Read More...
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 order-md-2 order-1 px-lg-3 px-0" 
+                            data-aos="flip-right" 
+                            data-aos-duration="600"
+                            >
+                            <img class="w-100 bg-left" [src]="apiAsset + dataTeam.picture" alt="">
+                        </div>
+                    </div>
+                </div>
+                <!-- news & events -->
+                <div class="press-news">
+                    <div class="row mx-lg-0">
+                        <div class="col-md-6">
+                            <div class="title text-md-left text-center">
+                                <h4 *ngIf="lang === 'en'" class="c-blue">Press Release</h4>
+                                <h4 *ngIf="lang === 'id'" class="c-blue">Siaran Pers</h4>
+                                <hr class="yellow-border ml-md-0">
+                            </div>
+                            <div *ngFor='let data of dataPress | slice:0:3; let i = index'
+                                data-aos="fade-up" 
+                                data-aos-duration="400"
+                                class="mb-4">
+                                <app-info-thumbnail 
+                                    [dataInfo]="data"
+                                    [files]="true"
+                                    [link]="apiAsset">
+                                </app-info-thumbnail>
+                            </div>
+                        </div>
+                        <div class="col-md-6 pt-md-0 pt-4">  
+                            <div class="title text-md-left text-center">
+                                <h4 *ngIf="lang === 'en'" class="c-blue">News & Events</h4>
+                                <h4 *ngIf="lang === 'id'" class="c-blue">Berita & Kegiatan</h4>
+                                <hr class="yellow-border ml-md-0">
+                            </div>
+                            <div data-aos="fade-up" 
+                                data-aos-duration="400"
+                                class="mb-4">
+                                <app-info-thumbnail 
+                                    [dataInfo]="dataNews"
+                                    [link]="'/'+lang+'/news-n-events/news'">
+                               </app-info-thumbnail>
+                            </div>
+                            <div data-aos="fade-up" 
+                                data-aos-duration="400"
+                                class="mb-4">
+                                <app-info-thumbnail 
+                                    [dataInfo]="dataEvent"
+                                    [link]="'/'+lang+'/news-n-events/event'">
+                                </app-info-thumbnail>
+                            </div>
+                            <div data-aos="fade-up" 
+                                data-aos-duration="400"
+                                class="mb-4">
+                                <app-info-thumbnail 
+                                    [dataInfo]="dataCSR"
+                                    [link]="'/'+lang+'/news-n-events/csr'">
+                                </app-info-thumbnail>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal glance company -->
+    <!-- <div *ngIf="isModalShown" 
+        [config]="{ show: true }" 
+        (onHidden)="onHidden()" 
+        bsModal 
+        #autoShownModal="bs-modal"
+        class="modal fade modal-glance"
+        tabindex="-1" 
+        role="dialog" 
+        aria-labelledby="dialog-auto-name">
+        <div class="modal-dialog py-4 my-0 h-100 modal-lg">
+            <div class="modal-content">
+                <div class="modal-x" aria-label="Close" (click)="hideModal()">
+                    <span aria-hidden="true"><i class="icon ion-ios-close"></i></span>
+                </div>
+                <div class="modal-body d-flex">
+                    <div class="img">
+                        <img class="w-100" [src]="apiAsset + logoModal" [alt]="titleModal">
+                    </div>
+                    <div class="detail pl-lg-4 px-3">
+                        <h5>{{ titleModal }}</h5>
+                        <div class="my-sm-3 my-2 text-justify" [innerHTML]="detailModal"></div>
+                        <div class="text-right">
+                            <a class="read-link" [routerLink]="'/'+lang+'/company/kino-at-a-glance/'+slugModal">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>

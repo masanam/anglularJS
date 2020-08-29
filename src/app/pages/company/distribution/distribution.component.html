@@ -1,0 +1,47 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+</div>
+<div class="distribution" *ngIf="!loading && bgImg">
+    <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+    </div>
+    <div class="maps mt-md-5 mt-4">
+        <div class="title text-md-left text-center mb-4">
+            <h4 class="c-blue">{{ titlePage }}</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="c-map">
+            <div class="choose-map" *ngIf="langTit === 'en'">
+                <span class="mp c-blue mr-4" 
+                    [ngClass]="{'active': map === true}"
+                    (click)="map = true">
+                    Local
+                </span>
+                <span class="mp c-blue" 
+                    [ngClass]="{'active': map === false}" 
+                    (click)="map = false">
+                    International
+                </span>
+            </div>
+            <div class="choose-map" *ngIf="langTit === 'id'">
+                <span class="mp c-blue mr-4" 
+                    [ngClass]="{'active': map === true}"
+                    (click)="map = true">
+                    Lokal
+                </span>
+                <span class="mp c-blue" 
+                    [ngClass]="{'active': map === false}" 
+                    (click)="map = false">
+                    Internasional
+                </span>
+            </div>
+            <div class="border-map" *ngIf="map">
+                <app-localmap></app-localmap>
+            </div>
+            <div class="border-map" *ngIf="!map">   
+                <app-internationalmap></app-internationalmap>
+            </div>
+        </div>
+    </div>
+</div>
+
+                    

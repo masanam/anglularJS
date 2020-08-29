@@ -1,0 +1,27 @@
+.people {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    img{
+        height: 220px;
+        object-fit: cover;
+        transform: none;
+        transition: transform .3s linear;
+    }
+    &:hover{
+        img{
+            transform: scale(1.05);
+        }
+    }
+    .overlay-mini{
+        position: absolute;
+        width: 100%;
+        bottom: 0px;
+        background: rgba(229, 229, 229, 0.77);
+        padding: 10px;
+        p{
+            font-size: 9pt;
+            margin-bottom: 0px;
+        }
+    }
+}

@@ -1,0 +1,72 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+</div>
+<div class="board" *ngIf="!loading && bgImg && dataPeople">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <div class="structure mt-md-5 mt-4">
+        <div class="title text-md-left text-center mb-4">
+            <h4 class="c-blue">{{ titlePage }}</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="people-struc">
+          
+            <div class="row">
+                <div class="col-lg-3 col-sm-4 col-6 py-3 mx-auto" 
+                    (click)="showModal(dataCeo)"
+                    data-aos="zoom-in" 
+                    data-aos-duration="300">
+                    <app-people
+                        [dataPeople]="dataCeo"
+                    >
+                    </app-people>
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-lg-3 col-sm-4 col-6 py-3" 
+                    *ngFor='let person of dataPeople | slice:1; let i = index'
+                    (click)="showModal(person)"
+                    data-aos="zoom-in" 
+                    data-aos-duration="300">
+                    <app-people
+                      [dataPeople]="person"
+                    >
+                    </app-people>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- modal board -->
+    <div *ngIf="isModalShown" 
+        [config]="{ show: true }" 
+        (onHidden)="onHidden()" 
+        bsModal 
+        #autoShownModal="bs-modal"
+        class="modal fade modal-director"
+        tabindex="-1" 
+        role="dialog" 
+        aria-labelledby="dialog-auto-name">
+        <div class="modal-dialog h-100 my-0 py-4 modal-lg">
+            <div class="modal-content">
+                <div class="modal-x" aria-label="Close" (click)="hideModal()">
+                    <span aria-hidden="true"><i class="icon ion-ios-close"></i></span>
+                </div>
+                <div class="modal-body d-flex">
+                    <div class="img">
+                        <img class="w-100 h-100" [src]="apiAsset + modalImg" [alt]="modalName">
+                    </div>
+                    <div class="detail scrollable pl-3 py-xl-5 py-4">
+                        <h4 class="name c-blue mb-0">{{ modalName }}</h4>
+                        <p class="mb-2 c-blue"><i>{{ modalPosition }}</i></p>
+                        <div class="prof text-justify" [innerHTML]="modalDetail"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

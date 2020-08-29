@@ -1,0 +1,31 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+</div>
+<div class="committess" 
+    *ngIf="!loading && bgImg && allData">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <div class="structure mt-md-5 mt-4">
+        <div class="title text-md-left text-center mb-4">
+            <h4 class="c-blue">{{ titlePage }}</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="people-struc">
+            <div class="py-3" *ngIf="dataAudit">
+                <app-table-structure [category]="dataAudit[0]?.category.title" [dataStructure]="dataAudit"></app-table-structure>
+            </div>
+            <div class="py-3" *ngIf="dataNomination">
+                <app-table-structure [category]="dataNomination[0]?.category.title" [dataStructure]="dataNomination"></app-table-structure>
+            </div>
+            <div class="py-3" *ngIf="dataCorporate">
+                <app-table-structure [category]="dataCorporate[0]?.category.title" [dataStructure]="dataCorporate"></app-table-structure>
+            </div>
+            <div class="py-3" *ngIf="dataInternal">
+                <app-table-structure [category]="dataInternal[0]?.category.title" [dataStructure]="dataInternal"></app-table-structure>
+            </div>
+        </div>
+    </div>
+</div>
+

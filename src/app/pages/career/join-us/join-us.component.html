@@ -1,0 +1,386 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+</div>
+<div class="join-us" *ngIf="!loading && dataJobs && bgImg && dataCompany">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <div class="logo my-md-5 my-4">
+        <div class="title mb-4">
+            <h4 class="c-blue text-md-left text-center">{{ titlePage }}</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+          <!-- desktop -->
+        <div class="warp d-md-flex d-none">
+            <a href="javascript:void(0)"
+               class="warp-logo p-md-3 p-2" 
+               *ngFor="let logo of dataCompany; let i = index"
+               (click)="changePagination(i+1)">
+                <img width="100%" [src]="apiAsset + logo.picture" alt="">
+            </a>
+        </div>
+        <!-- mobile -->
+        <div class="slider-logo d-md-none d-block">
+            <owl-carousel-o [options]="customOptions1">
+                <ng-container *ngFor="let logo of dataCompany; let i = index">
+                    <ng-template carouselSlide>
+                        <a href="javascript:void(0)" (click)="changePagination(i+1)">
+                            <img width="100%" [src]="apiAsset + logo.picture" alt="">
+                        </a>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </div>
+    </div>
+    <div class="jobs mt-5 mb-3"
+         *ngFor="let job of dataJobs | 
+         paginate: { id: 'jobs', itemsPerPage: 1, currentPage: pageListJobs}">
+        <div class="title mb-4">
+            <h4 class="c-blue text-md-left text-center">{{ job.title }}</h4>
+            <hr class="yellow-border ml-md-0">
+        </div> 
+        <div class="list-jobs" *ngIf="job.career.length > 0">
+            <accordion [isAnimated]="true" [closeOthers]="true">
+                <accordion-group [panelClass]="customClass" *ngFor="let terms of job.career; let i = index">
+                    <div class="title py-3" accordion-heading>
+                        <span class="text-uppercase">{{ terms.title }}</span>
+                    </div>
+                    <div class="detail py-4" [innerHTML]="terms.content">
+                    </div>
+                    <div class="apply pb-4 text-right">
+                        <button class="btn yellow-btn" 
+                                (click)="showModal(terms.title, job.title)">
+                                APPLY
+                        </button>
+                    </div>
+                </accordion-group>
+            </accordion>
+        </div>
+        <div class="list-jobs" *ngIf="job.career.length === 0">
+            <h6 *ngIf="lang === 'en'" class="mt-3 c-blue">No Jobs Available</h6>
+            <h6 *ngIf="lang === 'id'" class="mt-3 c-blue">Belum ada lowongan pekerjaan yang dibuka</h6>
+        </div>
+    </div>
+    <pagination-template 
+        id="jobs"
+        class="d-none"
+        #listjob="paginationApi" 
+        (pageChange)="pageListJobs = $event" 
+        autoHide="true" 
+        maxSize="5">
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li class="page-item" 
+                    [class.disabled]="listjob.isFirstPage()" 
+                    aria-disabled="true">
+                    <a class="page-link" (click)="listjob.previous()">Prev</a>
+                </li>
+                <div *ngFor="let page of listjob.pages" 
+                    [class.current]="listjob.getCurrent() === page.value">
+                    <li class="page-item">
+                        <a class="page-link" 
+                        (click)="listjob.setCurrent(page.value)"
+                            *ngIf="listjob.getCurrent() !== page.value">
+                            <span>{{ page.label }}</span>
+                        </a>
+                    </li>
+                    <li class="page-item active" *ngIf="listjob.getCurrent() === page.value">
+                        <a class="page-link" class="page-link">
+                            <span>{{ page.label }}</span>
+                        </a>
+                    </li>                        
+                </div>
+                <li class="page-item" 
+                    [class.disabled]="listjob.isLastPage()" 
+                    aria-disabled="true">
+                    <a class="page-link" (click)="listjob.next()">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </pagination-template>
+    <!-- modal form -->
+    <div *ngIf="isModalApply" 
+        [config]="{ show: true }" 
+        (onHidden)="onHidden()" 
+        bsModal 
+        #autoShownModal="bs-modal"
+        class="modal fade apply-pop"
+        tabindex="-1" 
+        role="dialog" 
+        aria-labelledby="dialog-auto-name">
+        <div class="modal-dialog modal-lg d-block">
+            <div class="modal-content">
+                <div class="bg-recuit">
+                    <h5>e-Recruitment</h5>
+                    <div class="rec-info d-flex justify-content-between">
+                        <h6 class="text-capitalize">Welcome, {{ user?.firstName }} {{ user?.lastName }}</h6>
+                        <div (click)="signOut()" class="btn-log d-flex align-items-center">
+                            <p class="mb-0">Log Out</p>
+                            <span class="icon">
+                                <i class="icon ion-md-log-out"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-x" aria-label="Close" (click)="hideModal()">
+                    <span aria-hidden="true"><i class="icon ion-ios-close"></i></span>
+                </div>
+                <div class="modal-body">
+                    <div class="title-apply text-center">
+                        <h5>{{ dataJobCom }}</h5>
+                        <p class="fams my-3">You are one stop closer to be part of Kino’s family as</p>
+                        <h5 class="c-blue assistant mb-5">{{ dataJobPosi }}</h5>
+                    </div>
+                    <form class="form-apply"
+                        #careerForm="ngForm"
+                        (ngSubmit)="onSubmit(careerForm)" 
+                        novalidate>
+                        <input type="hidden" name="position" #position="ngModel" [ngModel]="dataJobPosi">
+                        <div class="form-group d-flex">
+                            <div class="for-1">
+                                <label class="c-blue" for="first-name">FIRST NAME*</label>
+                            </div>
+                            <div class="for-2">
+                                <input type="text"
+                                        class="form-control" 
+                                        id="first-name"
+                                        #firstname="ngModel" 
+                                        name="firstname"
+                                        [ngModel]="user?.firstName"
+                                        readonly>
+                            </div>
+                        </div> 
+                        <div class="form-group d-flex">
+                            <div class="for-1">
+                                <label class="c-blue" for="last-name">LAST NAME</label>
+                            </div>
+                            <div class="for-2">
+                                <input type="text" 
+                                        class="form-control"
+                                        id="last-name"
+                                        #lastname="ngModel"
+                                        name="lastname"
+                                        [ngModel]="user?.lastName"
+                                        readonly>
+                            </div>
+                        </div> 
+                        <div class="form-group d-flex">
+                            <div class="for-1">
+                                <label class="c-blue" for="email">EMAIL ADDRESS*</label>
+                            </div>
+                            <div class="for-2">
+                                <input type="email" 
+                                        class="form-control" 
+                                        id="email"
+                                        #email="ngModel"
+                                        name="email"
+                                        [ngModel]="user?.email"
+                                        readonly>
+                            </div>
+                        </div> 
+                        <div class="form-group d-flex">
+                            <div class="for-1">
+                                <label class="c-blue" for="phone">PHONE NUMBER*</label>
+                            </div>
+                            <div class="for-2">
+                                <input type="number" 
+                                        min="0" 
+                                        class="form-control" 
+                                        id="phone" 
+                                        required
+                                        #phone="ngModel" 
+                                        [class.is-invalid]="phone.invalid && phone.touched" 
+                                        name="phone"
+                                        ngModel>
+                                <small class="text-danger w-100" 
+                                      [class.d-none]="phone.valid || phone.untouched">
+                                      Phone with number only is required
+                                </small>
+                            </div>
+                        </div> 
+                        <div class="form-group d-flex">
+                            <div class="for-1">
+                                <label class="c-blue" for="address">ADDRESS*</label>
+                            </div>
+                            <div class="for-2">
+                                <textarea class="form-control" 
+                                          id="address" 
+                                          rows="4" 
+                                          required 
+                                          #address="ngModel" 
+                                          [class.is-invalid]="address.invalid && address.touched" 
+                                          name="address" 
+                                          ngModel>
+                                </textarea>
+                                 <small class="text-danger" 
+                                        [class.d-none]="address.valid || address.untouched">
+                                        Address is required
+                                </small>
+                            </div>
+                        </div> 
+                        <div class="form-group d-flex">
+                            <div class="for-1">
+                                <label class="c-blue" for="resume">PLEASE UPLOAD YOUR RESUME*</label>
+                            </div>
+                            <div class="box-file for-2">
+                                <div class="border-dash">
+                                    <div class="drop">
+                                        <ngx-file-drop (onFileDrop)="dropped($event)">
+                                            <ng-template ngx-file-drop-content-tmp 
+                                                         let-openFileSelector="openFileSelector">
+                                                         <button class="h-100 w-100" 
+                                                                type="button" 
+                                                                (click)="openFileSelector()">
+                                                                Browse Files
+                                                        </button>
+                                            </ng-template>
+                                        </ngx-file-drop>
+                                    </div>
+                                    <div class="warp text-center">
+                                        <img class="icon" src="../../../../assets/img/icons/cloud.svg" alt="">
+                                        <p class="py-lg-3 py-2 mb-0 c-blue">Click or drop files here to upload </p>
+                                        <p class="accept" *ngIf="files.length === 0">
+                                            Accepted files: PDF, JPG/JPEG <br>
+                                            max file size 3MB 
+                                        </p>
+                                        <h6 class="file-name mb-1" *ngFor="let item of files; let i=index">
+                                            {{ item.relativePath }}
+                                        </h6>
+                                        <small class="text-danger dang-file">
+                                            {{ supportFile }}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2 pt-md-3 pt-2 submit d-md-flex justify-content-between">
+                            <div class="w-small">
+                                <small class="c-blue d-block">*) All Fields must be filled in completely and correctly</small>
+                                <small *ngIf="!loadForm" class="text-danger d-block">*) Failed to send your apply, check all fields and/or try to resubmit again !</small>
+                            </div>
+                            <div class="text-md-left pt-3 pt-md-0 text-right">
+                                <button class="btn blue-btn" [disabled]="careerForm.form.invalid || !fileReceive" type="submit">SUBMIT</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal login-register -->
+    <div *ngIf="isModalLogin" 
+        [config]="{ show: true }" 
+        (onHidden)="onHidden()" 
+        bsModal 
+        #autoShownModal="bs-modal"
+        class="modal fade login-pop"
+        tabindex="-1" 
+        role="dialog" 
+        aria-labelledby="dialog-auto-name">
+         <div class="modal-dialog my-0 py-4 h-100 modal-md">
+            <div class="modal-content">
+                <div class="modal-x" aria-label="Close" (click)="hideModal()">
+                    <span aria-hidden="true"><i class="icon ion-ios-close"></i></span>
+                </div>
+                <div class="modal-body">
+                    <div class="title-apply text-center"> 
+                        <h5 *ngIf="login || !regist" class="login-text">LOGIN TO KINO</h5>
+                        <h5 *ngIf="regist" class="login-text">REGISTER TO KINO</h5>
+                    </div>
+                    <div class="login py-3 px-4 text-center"  *ngIf="!regist && !login">
+                        <p class="welcom">Welcome to Kino Group recruitment platform. To access your account, please identify yourself by providing the information requested in the fields below. then click "login". If you're not registered yet, click "New User" and follow the instructions to create an account.</p>
+                        <div class="login-with px-sm-5 px-4 pt-4">
+                            <div class="sos-warp fb" (click)="loginRegist('login')">
+                                <p>Login</p>
+                            </div>
+                            <div class="or-warp p-4">
+                                <hr class="lane">
+                                <h6 class="or">OR</h6>
+                            </div>
+                            <div class="sos-warp google" (click)="loginRegist('regist')">
+                                <p>New User</p>
+                            </div>
+                            <p class="mb-3 mt-4 note"> Login to Kino to see job opportunities and apply.</p>
+                        </div>
+                    </div>
+                    <div *ngIf="regist || login" (click)="onBack()" class="back-arrow c-blue p-3 pr-0">
+                        <i class="icon ion-md-arrow-dropleft-circle"></i>
+                    </div>
+                    <div class="form-registrasi px-sm-5 px-4 pb-4 pt-0" *ngIf="regist">
+                        <form action="">
+                            <div class="form-group">
+                                <!-- username -->
+                                <label class="c-blue" for="username">Username* :</label>
+                                    <input type="text" 
+                                        class="form-control" 
+                                        id="username" 
+                                        placeholder="username"
+                                        required
+                                       > 
+                            </div>
+                            <div class="form-group">
+                                <label class="c-blue" for="email-regist">Email* :</label>
+                                    <input type="email" 
+                                        class="form-control" 
+                                        id="email-regist" 
+                                        placeholder="email"
+                                        required
+                                       >
+                            </div>
+                            <div class="form-group">
+                                <label class="c-blue" for="passwprd">Password* :</label>
+                                    <input type="password" 
+                                        class="form-control" 
+                                        id="password-regist" 
+                                        placeholder="password"
+                                        required
+                                       >
+                            </div>
+                            <div class="text-center pt-3 form-group">
+                                <button class="btn px-4 blue-btn">Log In</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="form-login px-sm-5 px-4 pb-4 pt-0" *ngIf="login">
+                        <form action="">
+                            <div class="form-group">
+                                <label class="c-blue" for="username">Username* :</label>
+                                    <input type="text" 
+                                        class="form-control" 
+                                        id="username" 
+                                        placeholder="username"
+                                        required
+                                       >
+                            </div>
+                            <div class="form-group">
+                                <label class="c-blue" for="email-regist">Email* :</label>
+                                    <input type="email" 
+                                        class="form-control" 
+                                        id="email-regist" 
+                                        placeholder="email"
+                                        required
+                                       >
+                            </div>
+                            <div class="form-group">
+                                <label class="c-blue" for="passwprd">Password* :</label>
+                                    <input type="password" 
+                                        class="form-control" 
+                                        id="password-regist" 
+                                        placeholder="password"
+                                        required
+                                       >
+                            </div>
+                            <div class="form-group pt-3 text-center">
+                                <button class="btn px-4 blue-btn">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,68 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="announ-coverage" 
+    *ngIf="!loading && bgImg && dataCoverage">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <div class="coverage mt-md-5 mt-4">
+        <div class="title text-md-left text-center mb-4">
+            <h4 class="c-blue">{{ titlePage }}</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="all-coverage">
+            <div class="py-3 blast-none" 
+                *ngFor="let coverage of dataCoverage 
+                | paginate: { id: 'coverage', itemsPerPage: 3, currentPage: pageMedia }">
+                <app-list-coverage 
+                    [dataList]="coverage"
+                    [langNow]="lang"
+                ></app-list-coverage>
+            </div>
+        </div>
+        <pagination-template 
+            id="coverage"
+            #coverage="paginationApi" 
+            (pageChange)="pageMedia = $event" 
+            autoHide="true" 
+            maxSize="5">
+            <nav class="pt-4">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" 
+                        [class.disabled]="coverage.isFirstPage()" 
+                        aria-disabled="true">
+                        <a class="page-link" (click)="coverage.previous()">Prev</a>
+                    </li>
+                    <div *ngFor="let page of coverage.pages" 
+                        [class.current]="coverage.getCurrent() === page.value">
+                        <li class="page-item">
+                            <a class="page-link" 
+                            (click)="coverage.setCurrent(page.value)"
+                                *ngIf="coverage.getCurrent() !== page.value">
+                                <span>{{ page.label }}</span>
+                            </a>
+                        </li>
+                        <li class="page-item active" *ngIf="coverage.getCurrent() === page.value">
+                            <a class="page-link" class="page-link">
+                                <span>{{ page.label }}</span>
+                            </a>
+                        </li>                        
+                    </div>
+                    <li class="page-item" 
+                        [class.disabled]="coverage.isLastPage()" 
+                        aria-disabled="true">
+                        <a class="page-link" (click)="coverage.next()">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </pagination-template>
+    </div>
+</div>
+
+        
+
+
+
+

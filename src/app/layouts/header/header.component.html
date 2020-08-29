@@ -1,0 +1,442 @@
+<div class="main-header" (click)="onCloseSearch()" [ngClass]="{'active-m': openListMenu === true}">
+    <div class="container px-xl-4">
+        <div class="row m-xl-0">
+            <div class="d-flex flex-lg-row flex-column align-items-center w-100">
+                <!-- logo -->
+                <div class="w-logo d-lg-block d-flex justify-content-between align-items-center order-1" 
+                     routerLinkActive="current" 
+                     [routerLinkActiveOptions]="{exact: true}">
+                    <a [routerLink]="'/'+lang" class="logo" (click)="closeMenu()">
+                        <img class="w-100" src="../../../assets/img/kino.png" alt="">
+                    </a>
+                    <div class="hamburger d-lg-none" (click)="onOpenMenuMobile()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <!-- all menu -->
+                <div class="all-menu pt-lg-2 order-lg-2 order-3">
+                    <ul class="nav flex-lg-row flex-column justify-content-lg-between">
+                        <!-- company -->
+                        <li class="w-title parent" 
+                            routerLinkActive="current"
+                            (mouseenter)="openDropdownD($event)"  
+                            (mouseleave)="closeDropdownD($event)">
+                            <!-- desktop -->
+                            <a  class="menu-name d-lg-block d-none" 
+                                [routerLink]="lang+'/company/about-kino'"
+                                (click)="closeMenu()">
+                                COMPANY 
+                            </a>
+                            <!-- mobile -->
+                            <a  class="menu-name d-lg-none d-block" 
+                                (click)="listMenuMobile($event)">
+                                COMPANY 
+                                <span class="d-lg-none arr"><i class="icon ion-ios-arrow-down"></i></span>
+                            </a>
+                            <hr class="active-border">
+                            <div class="child" (click)="closeMenu()"> 
+                                <div class="container con-company pr-lg-3 px-0">
+                                    <div class="row">
+                                        <div class="col-lg-6 px-lg-3 px-0">
+                                            <h4 class="title d-lg-block d-none">Overview</h4>
+                                            <!-- english -->
+                                            <div *ngIf="lang === 'en'" class="row">
+                                                <div class="col-lg pl-lg-3 pr-lg-2 px-0">
+                                                    <ul class="child-list">
+                                                        <li>
+                                                            <a [routerLink]="'/'+lang+'/company/about-kino'">About Us</a>
+                                                            <!-- mobile -->
+                                                            <ul class="child-list d-lg-none d-block pl-3">
+                                                                <li><a [routerLink]="'/'+lang+'/company/about-kino'">About Kino</a></li>
+                                                                <li><a [routerLink]="'/'+lang+'/company/milestone'">Milestone</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li><a [routerLink]="'/'+lang+'/company/kino-at-a-glance'">Kino at a Glance</a></li>
+                                                        <li><a [routerLink]="'/'+lang+'/company/achievement-certification'">Achievement & Certification</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-lg pr-lg-3 pl-lg-2 px-0">
+                                                    <ul class="child-list">
+                                                        <li>
+                                                            <a [routerLink]="'/'+lang+'/company/board-of-director'">Management</a>
+                                                            <!-- mobile -->
+                                                            <ul class="child-list d-lg-none d-block pl-3">
+                                                                <li class="d-lg-none d-block"><a [routerLink]="'/'+lang+'/company/board-of-director'">Board of Director</a></li>
+                                                                <li class="d-lg-none d-block"><a [routerLink]="'/'+lang+'/company/board-of-commissioner'">Board of Commissioner</a></li>
+                                                                <li class="d-lg-none d-block"><a [routerLink]="'/'+lang+'/company/committees-structure'">Committeess Structure</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li><a [routerLink]="'/'+lang+'/company/distribution'">Distribution</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!-- indonesia -->
+                                            <div *ngIf="lang === 'id'" class="row">
+                                                <div class="col-lg pl-lg-3 pr-lg-2 px-0">
+                                                    <ul class="child-list">
+                                                        <li>
+                                                            <a [routerLink]="'/'+lang+'/company/about-kino'">Tentang Kami</a>
+                                                            <!-- mobile -->
+                                                            <ul class="child-list d-lg-none d-block pl-3">
+                                                                <li><a [routerLink]="'/'+lang+'/company/about-kino'">Tentang Kino</a></li>
+                                                                <li><a [routerLink]="'/'+lang+'/company/milestone'">Sejarah</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li><a [routerLink]="'/'+lang+'/company/kino-at-a-glance'">Sekilas Tentang Kino</a></li>
+                                                        <li><a [routerLink]="'/'+lang+'/company/achievement-certification'">Prestasi & Sertifikat</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-lg pr-lg-3 pl-lg-2 px-0">
+                                                    <ul class="child-list">
+                                                        <li>
+                                                            <a [routerLink]="'/'+lang+'/company/board-of-director'">Manajemen</a>
+                                                            <!-- mobile -->
+                                                            <ul class="child-list d-lg-none d-block pl-3">
+                                                                <li class="d-lg-none d-block"><a [routerLink]="'/'+lang+'/company/board-of-director'">Dewan Direksi</a></li>
+                                                                <li class="d-lg-none d-block"><a [routerLink]="'/'+lang+'/company/board-of-commissioners'">Dewan Komisaris</a></li>
+                                                                <li class="d-lg-none d-block"><a [routerLink]="'/'+lang+'/company/committees-structure'">Struktur Komite</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li><a [routerLink]="'/'+lang+'/company/distribution'">Distribusi</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- brands -->
+                        <li class="w-title parent" 
+                            routerLinkActive="current"
+                            (mouseenter)="openDropdownD($event)"  
+                            (mouseleave)="closeDropdownD($event)">
+                            <!-- desktop -->
+                            <a  class="menu-name d-lg-block d-none" 
+                                [routerLink]="'/'+lang+'/brands/latest-innovations'"
+                                (click)="closeMenu()">
+                                 Brands
+                            </a>
+                            <!-- mobile -->
+                            <a  class="menu-name d-lg-none d-block" 
+                                (click)="listMenuMobile($event)">
+                                Brands
+                                <span class="d-lg-none arr"><i class="icon ion-ios-arrow-down"></i></span>
+                            </a>
+                            <hr class="active-border">
+                            <div class="child child-brands" (click)="closeMenu()"> 
+                                <div class="container px-lg-3 px-0">
+                                    <div class="row">
+                                        <div class="col-lg-9 con-brands pr-lg-3 px-0 ml-auto">
+                                            <h4 class="title d-lg-block d-none">Overview</h4>
+                                            <div class="row">
+                                                <!-- english -->
+                                                <div class="col-lg-4 px-lg-3 px-0" *ngIf="lang === 'en'">
+                                                    <ul class="child-list">
+                                                        <li><a [routerLink]="'/'+lang+'/brands/latest-innovations'">Latest Innovations</a></li>
+                                                        <li><a class="brand-arrow" [routerLink]="'/'+lang+'/brands/hair-care'">Our Brands</a></li>
+                                                    </ul>
+                                                </div>
+                                                <!-- indonesia -->
+                                                <div class="col-lg-4 px-lg-3 px-0" *ngIf="lang === 'id'">
+                                                    <ul class="child-list">
+                                                        <li><a [routerLink]="'/'+lang+'/brands/latest-innovations'">Inovasi Terbaru</a></li>
+                                                        <li><a class="brand-arrow" [routerLink]="'/'+lang+'/brands/hair-care'">Produk Kami</a></li>
+                                                    </ul>
+                                                </div>
+                                                <!-- desktop -->
+                                                <div class="col-lg-8 pr-lg-4 pl-lg-3 px-0 d-lg-block d-none">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 px-lg-2"
+                                                            *ngFor="let brand of dataBrandMenu 
+                                                            | paginate: { id: 'hbrands', itemsPerPage: 6, currentPage: menuBrand }">
+                                                            <ul class="child-list">
+                                                                <li><a [routerLink]="'/'+lang+'/brands/'+brand.slug">{{ brand.title }}</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <pagination-template 
+                                                        id="hbrands" 
+                                                        #hbrand="paginationApi" 
+                                                        (pageChange)="menuBrand = $event">
+                                                        <div class="d-flex justify-content-end prev-next">
+                                                            <span (click)="hbrand.previous(); onPrevent($event)"
+                                                                    [class.d-none]="hbrand.isFirstPage()">
+                                                                    <i class="ion-ios-arrow-back"></i> 
+                                                            </span>
+                                                            <span (click)="hbrand.next(); onPrevent($event)" 
+                                                                  [class.d-none]="hbrand.isLastPage()">
+                                                                  <i class="ion-ios-arrow-forward"></i>
+                                                            </span>
+                                                        </div>
+                                                    </pagination-template>
+                                                </div>
+                                                <!-- mobile -->
+                                                <div class="col-lg-8 px-0 d-lg-none d-block">
+                                                    <div class="row">
+                                                        <div class="col-6"
+                                                            *ngFor="let brand of dataBrandMenu">
+                                                            <ul class="child-list">
+                                                                <li><a [routerLink]="'/'+lang+'/brands/'+brand.slug">{{ brand.title }}</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- investor -->
+                        <li class="w-title parent" 
+                            routerLinkActive="current"
+                            (mouseenter)="openDropdownD($event)"  
+                            (mouseleave)="closeDropdownD($event)">
+                            <!-- desktop -->
+                            <a  class="menu-name d-lg-block d-none" 
+                                [routerLink]="'/'+lang+'/investor/corporate-information'"
+                                (click)="closeMenu()" >
+                                 Investor
+                            </a>
+                            <!-- mobile -->
+                            <a  class="menu-name d-lg-none d-block" 
+                                (click)="listMenuMobile($event)">
+                                Investor
+                                <span class="d-lg-none arr"><i class="icon ion-ios-arrow-down"></i></span>
+                            </a>
+                            <hr class="active-border">
+                            <div class="child" (click)="closeMenu()"> 
+                                <div class="container px-lg-3 px-0">
+                                    <div class="row">
+                                        <div class="col-lg-8 con-invest pr-lg-3 px-0 ml-auto">
+                                            <h4 class="title d-lg-block d-none">Overview</h4>
+                                            <!-- english -->
+                                            <div *ngIf="lang === 'en'" class="row">
+                                                <div class="col-xl col-lg-6 pl-lg-3 pr-lg-2 px-0">
+                                                    <ul class="child-list">
+                                                        <li><a [routerLink]="'/'+lang+'/investor/corporate-information'">Corporate Information</a></li>
+                                                        <li>
+                                                            <a [routerLink]="'/'+lang+'/investor/shareholding-structure'">Company Structure</a>
+                                                             <!-- mobile -->
+                                                             <ul class="child-list d-lg-none d-block pl-3">
+                                                                <li><a [routerLink]="'/'+lang+'/investor/shareholding-structure'">Shareholding Structure</a></li>
+                                                                <li><a [routerLink]="'/'+lang+'/investor/organization-structure'">Organization Structure</a></li>
+                                                                <li><a [routerLink]="'/'+lang+'/investor/share-information'">Share Information</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li>
+                                                            <a [routerLink]="'/'+lang+'/investor/press-release'">Announcement</a>
+                                                            <!-- mobile -->
+                                                            <ul class="child-list d-lg-none d-block pl-3">
+                                                                <li><a [routerLink]="'/'+lang+'/investor/press-release'">Press Release</a></li>
+                                                                <li><a [routerLink]="'/'+lang+'/investor/media-coverage'">Media Coverage</a></li>
+                                                                <li><a [routerLink]="'/'+lang+'/investor/others'">Others</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xl col-lg-6 px-lg-2 px-0">
+                                                    <ul class="child-list">
+                                                        <li><a [routerLink]="'/'+lang+'/investor/general-meeting-of-shareholders'">General Meeting of Shareholders</a></li>
+                                                        <li>
+                                                            <a [routerLink]="'/'+lang+'/investor/financial-statement'">Report</a>
+                                                            <!-- mobile -->
+                                                            <ul class="child-list d-lg-none d-block pl-3">
+                                                                <li><a [routerLink]="'/'+lang+'/investor/financial-statement'">Financial Statement</a></li>
+                                                                <li><a [routerLink]="'/'+lang+'/investor/annual-report'">Annual Report</a></li>
+                                                                <li><a [routerLink]="'/'+lang+'/investor/prospectus'">Prospectus</a></li>
+                                                                <li><a [routerLink]="'/'+lang+'/investor/company-presentation'">Company Presentation</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li><a [routerLink]="'/'+lang+'/investor/corporate-governance'">Corporate Governance</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xl col-lg-6 pl-xl-2 pr-xl-3 pr-lg-2 pl-lg-3 px-0">
+                                                    <ul class="child-list">
+                                                        <li><a [routerLink]="'/'+lang+'/investor/investor-contact'">Investor Contact</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!-- indonesia -->
+                                            <div *ngIf="lang === 'id'" class="row">
+                                                <div class="col-xl col-lg-6 pl-lg-3 pr-lg-2 px-0">
+                                                    <ul class="child-list">
+                                                        <li><a [routerLink]="'/'+lang+'/investor/corporate-information'">Informasi Perusahaan</a></li>
+                                                        <li>
+                                                            <a [routerLink]="'/'+lang+'/investor/shareholding-structure'">Struktur Perusahaan</a>
+                                                             <!-- mobile -->
+                                                             <ul class="child-list d-lg-none d-block pl-3">
+                                                                <li><a [routerLink]="'/'+lang+'/investor/shareholding-structure'">Struktur Kepemilikan</a></li>
+                                                                <li><a [routerLink]="'/'+lang+'/investor/organization-structure'">Struktur Organisasi</a></li>
+                                                                <li><a [routerLink]="'/'+lang+'/investor/share-information'">Informasi Saham</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li>
+                                                            <a [routerLink]="'/'+lang+'/investor/press-release'">Pengumuman</a>
+                                                            <!-- mobile -->
+                                                            <ul class="child-list d-lg-none d-block pl-3">
+                                                                <li><a [routerLink]="'/'+lang+'/investor/press-release'">Siaran Pers</a></li>
+                                                                <li><a [routerLink]="'/'+lang+'/investor/media-coverage'">Jangkauan Media</a></li>
+                                                                <li><a [routerLink]="'/'+lang+'/investor/others'">Lain-lain</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xl col-lg-6 px-lg-2 px-0">
+                                                    <ul class="child-list">
+                                                        <li><a [routerLink]="'/'+lang+'/investor/general-meeting-of-shareholders'">Rapat Umum Pemegang Saham</a></li>
+                                                        <li>
+                                                            <a [routerLink]="'/'+lang+'/investor/financial-statement'">Laporan</a>
+                                                            <!-- mobile -->
+                                                            <ul class="child-list d-lg-none d-block pl-3">
+                                                                <li><a [routerLink]="'/'+lang+'/investor/financial-statement'">Laporan Keuangan</a></li>
+                                                                <li><a [routerLink]="'/'+lang+'/investor/annual-report'">Laporan Tahunan</a></li>
+                                                                <li><a [routerLink]="'/'+lang+'/investor/prospectus'">Prospektus</a></li>
+                                                                <li><a [routerLink]="'/'+lang+'/investor/company-presentation'">Presentasi Perusahaan</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li><a [routerLink]="'/'+lang+'/investor/corporate-governance'">Tata Kelola Perusahaan</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xl col-lg-6 pl-xl-2 pr-xl-3 pr-lg-2 pl-lg-3 px-0">
+                                                    <ul class="child-list">
+                                                        <li><a [routerLink]="'/'+lang+'/investor/investor-contact'">Kontak Investor</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- news & event -->
+                        <li class="w-title parent" 
+                            routerLinkActive="current"
+                            (mouseenter)="openDropdownD($event)"  
+                            (mouseleave)="closeDropdownD($event)">
+                            <!-- desktop -->
+                            <a  class="menu-name d-lg-block d-none" 
+                                [routerLink]="'/'+lang+'/news-n-events/news'"
+                                (click)="closeMenu()">
+                                News & Event
+                            </a>
+                            <!-- mobile -->
+                            <a  class="menu-name d-lg-none d-block" 
+                                (click)="listMenuMobile($event)">
+                                 News & Event
+                                <span class="d-lg-none arr"><i class="icon ion-ios-arrow-down"></i></span>
+                            </a>
+                            <hr class="active-border">
+                            <div class="child" (click)="closeMenu()"> 
+                                <div class="container px-lg-3 px-0">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                        </div>
+                                        <div class="col-lg-3 px-xl-3 px-lg-2 px-0">
+                                            <h4 class="title d-lg-block d-none">Overview</h4>
+                                            <!-- english -->
+                                            <ul *ngIf="lang === 'en'" class="child-list">
+                                                <li><a [routerLink]="'/'+lang+'/news-n-events/news'">News</a></li>
+                                                <li><a [routerLink]="'/'+lang+'/news-n-events/event'">Event</a></li>
+                                                <li><a [routerLink]="'/'+lang+'/news-n-events/csr'">CSR</a></li>
+                                            </ul>
+                                            <!-- indonesia -->
+                                            <ul *ngIf="lang === 'id'" class="child-list">
+                                                <li><a [routerLink]="'/'+lang+'/news-n-events/news'">Berita</a></li>
+                                                <li><a [routerLink]="'/'+lang+'/news-n-events/event'">Kegiatan</a></li>
+                                                <li><a [routerLink]="'/'+lang+'/news-n-events/csr'">Tanggung Jawab Sosial Perusahaan</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- career -->
+                        <li class="w-title parent"  
+                            routerLinkActive="current"
+                            (mouseenter)="openDropdownD($event)"  
+                            (mouseleave)="closeDropdownD($event)">
+                             <!-- desktop -->
+                            <a  class="menu-name d-lg-block d-none" 
+                                [routerLink]="'/'+lang+'/careers/work-at-kino'"
+                                (click)="closeMenu()">
+                                Career
+                            </a>
+                            <!-- mobile -->
+                            <a  class="menu-name d-lg-none d-block" 
+                                (click)="listMenuMobile($event)">
+                                 Career
+                                <span class="d-lg-none arr"><i class="icon ion-ios-arrow-down"></i></span>
+                            </a>
+                            <hr class="active-border">
+                            <div class="child" (click)="closeMenu()"> 
+                                <div class="container px-lg-3 px-0">
+                                    <div class="row">
+                                        <div class="col-lg-8"></div>
+                                        <div class="col-lg-3 con-careers pr-lg-3 pl-xl-0 pl-lg-1 px-0">
+                                            <h4 class="title d-lg-block d-none">Overview</h4>
+                                            <!-- english -->
+                                            <ul class="child-list" *ngIf="lang === 'en'">
+                                                <li><a [routerLink]="'/'+lang+'/careers/work-at-kino'">Work at Kino</a></li>
+                                                <li><a [routerLink]="'/'+lang+'/careers/join-us'">Join Us</a></li>
+                                                <li><a [routerLink]="'/'+lang+'/careers/development-program'">Development & Program</a></li>
+                                                <li><a [routerLink]="'/'+lang+'/careers/testimonies'">Testimonies</a></li>
+                                            </ul>
+                                            <!-- indonesia -->
+                                            <ul class="child-list" *ngIf="lang === 'id'">
+                                                <li><a [routerLink]="'/'+lang+'/careers/work-at-kino'">Bekerja di Kino</a></li>
+                                                <li><a [routerLink]="'/'+lang+'/careers/join-us'">Bergabunglah dengan Kami</a></li>
+                                                <li><a [routerLink]="'/'+lang+'/careers/development-program'">Pengembangan & Program</a></li>
+                                                <li><a [routerLink]="'/'+lang+'/careers/testimonies'">Testimoni</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- contact us -->
+                        <li class="w-title" routerLinkActive="current">
+                            <a [routerLink]="'/'+lang+'/contact-us'" class="menu-name" (click)="closeMenu()">Contact uS</a>
+                            <hr class="active-border">
+                        </li>
+                    </ul>
+                </div>
+                <!-- dual language and search -->
+                <div class="en-id pt-lg-2 order-lg-3 order-2">
+                    <ul class="nav justify-content-lg-start justify-content-end">    
+                        <!-- search  -->
+                        <li class="search-warp order-lg-1 order-3">
+                            <div class="form-group mb-0 text-lg-left text-right" 
+                                (click)="onOpenSearch($event)">
+                                <input type="text" 
+                                        class="form-control form-search" 
+                                        name="search"  
+                                        id="search"
+                                        placeholder="search and enter ..."  
+                                        [(ngModel)]="search" 
+                                        [ngClass]="{'active-search':  openSearch === true}"
+                                        (keydown)="onSearch($event)">
+                                <img class="ic-search" 
+                                    src="../../../assets/img/icons/search.svg" 
+                                    alt="">
+                            </div> 
+                        </li>
+                        <!-- language -->
+                        <li class="w-lang order-lg-2 order-1">
+                            <a class="lang" #langen (click)="closeMenu(); changeLanguage('en')">EN</a>
+                        </li>
+                        <li class="w-lang order-lg-3 order-2">
+                            <a class="lang" #langid (click)="closeMenu(); changeLanguage('id')">ID</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

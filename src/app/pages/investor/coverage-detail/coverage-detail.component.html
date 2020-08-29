@@ -1,0 +1,18 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="coverage-detail" *ngIf="!loading && dataCoverage">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image': 'url(' + apiAsset + dataCoverage?.picture + ')'}">
+        </div>
+    </div>
+    <div class="group mt-4">
+        <div class="title text-md-left text-center mb-4">
+            <h4 class="c-blue">{{ dataCoverage?.title }}</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="detail list-circle text-justify"  [innerHTML]="dataCoverage?.content">
+        </div>
+    </div>
+</div>
+

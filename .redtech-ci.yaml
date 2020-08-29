@@ -1,0 +1,62 @@
+image: mattrayner/lamp:latest-1804
+
+variables:
+  # User/project variables
+  SERVER_PORT: 2027
+  
+  # System varibales
+  DOCKERHUB_URL: hub.redtech.co.id/
+  DOCKERHUB_USERNAME: $MY_USERNAME
+  DOCKERHUB_PASSWORD: $MY_PASSWORD
+  IMAGE_TAG: $MY_USERNAME/$CI_PROJECT_NAME:$CI_COMMIT_REF_NAME
+
+stages:
+  - test
+  - build
+  - deploy
+
+# cache:
+#   key: ${CI_COMMIT_REF_SLUG}
+#   paths:
+#     - node_modules/
+#     - vendor/
+
+unit_test:
+  stage: test
+  script:
+    - echo "Test stage skipped"
+
+build_image:
+  stage: build
+  image: docker:18.09.7
+  services:
+    - docker:18.09.7-dind
+  script:
+    - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD https://$DOCKERHUB_URL
+    - docker build -t $IMAGE_TAG .
+    - docker tag $IMAGE_TAG $DOCKERHUB_URL$IMAGE_TAG
+    - docker push $DOCKERHUB_URL$IMAGE_TAG
+  when: on_success
+  only:
+    - master
+
+deploy_development:
+  stage: deploy
+  script:
+    # Add the private SSH key to the build environment
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+    # Run envoy
+    - composer global require "laravel/envoy=~1.0"
+    - ~/.composer/vendor/bin/envoy run deploy --project="$CI_PROJECT_NAME" --branch="$CI_COMMIT_REF_NAME" --commit="$CI_COMMIT_SHA" --port="$SERVER_PORT" --dockerhub="$DOCKERHUB_URL" --dockeruser="$DOCKERHUB_USERNAME" --dockerpwd="$DOCKERHUB_PASSWORD"
+  environment:
+    name: development server
+    url: http://49.128.186.34:$SERVER_PORT
+  when: on_success
+  only:
+    - master
+

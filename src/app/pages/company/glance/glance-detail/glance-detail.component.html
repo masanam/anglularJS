@@ -1,0 +1,23 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+</div>
+<div class="glance-detail" *ngIf="!loading && dataGlance">
+    <div class="full-pad15">
+        <div class="bg-company" [ngStyle]="{'background-image': 'url('+ apiAsset + dataGlance?.picture +')'}">
+        </div>
+    </div>
+    <div class="group mt-4">
+        <div class="title text-md-left text-center mb-4">
+            <h4 class="c-blue">{{ dataGlance?.title }}</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="detail list-circle text-justify" [innerHTML]="dataGlance?.content">
+        </div>
+    </div>
+</div>
+
+
+ 
+       
+
+

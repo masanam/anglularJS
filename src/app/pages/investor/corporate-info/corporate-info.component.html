@@ -1,0 +1,52 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="corporate-info" *ngIf="!loading && bgImg && dataAdvisor && dataArticles">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <div class="info-advisor mt-md-5 mt-4">
+        <div class="title text-md-left text-center mb-4">
+            <h4 *ngIf="langTit === 'en'" class="c-blue">Professional Advisor</h4>
+            <h4 *ngIf="langTit === 'id'" 
+                class="c-blue d-xl-block d-none">
+                Lembaga dan Profesi Penunjang Pasar Modal
+            </h4>
+            <h4 *ngIf="langTit === 'id'" 
+                class="c-blue d-xl-none d-block">
+                Penasehat Profesional
+            </h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="list-advisor">
+            <accordion [isAnimated]="true" [closeOthers]="true">
+                <accordion-group [panelClass]="customClass" *ngFor="let advisor of dataAdvisor; let i = index">
+                    <div class="title py-2" accordion-heading>
+                        <span class="c-blue">{{ advisor.title }}</span>
+                    </div>
+                    <div class="detail py-4 no-list" [innerHTML]="advisor.description">
+                    </div>
+                </accordion-group>
+            </accordion>
+        </div>
+    </div>
+    <div class="info-articles mt-5 mb-3">
+        <div class="title text-md-left text-center mb-4">
+            <h4 *ngIf="langTit === 'en'" class="c-blue">Articles of Association</h4>
+            <h4 *ngIf="langTit === 'id'" class="c-blue">Anggaran Dasar</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="list-articles">
+            <div class="row file-row1">
+                <div class="col-sm-4 col-6 pad" 
+                    *ngFor="let article of  dataArticles | slice:0:3; let i = index">
+                    <app-files [dataFiles]="article"></app-files>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        
+

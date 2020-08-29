@@ -1,0 +1,47 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="brand" *ngIf="!loading && bgImg && dataPage">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <div class="list-brands mt-md-5 mt-4">
+        <div class="title text-md-left text-center mb-5">
+            <h4 class="c-blue">{{ titlePage }}</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <!-- page latest innovations -->
+        <div class="groups" *ngIf="dataPage.title === 'Latest Innovations'">
+            <div class="pad blast-none" 
+                *ngFor='let data of dataPage.data; let i = index'
+                data-aos="fade-up" 
+                data-aos-duration="300">
+                <app-list-brands 
+                    [dataList]="data"
+                    color="#005DA0"
+                    widthImg="180px"
+                    [uppercase]="true"
+                    [latest]="true"
+                    [lgNow]="lang"
+                    [titleCat]="data.brand.title">
+                </app-list-brands>
+            </div>
+        </div>
+        <!-- page our brands -->
+        <div class="groups" *ngIf="dataPage.title !== 'Latest Innovation'">
+            <div class="pad blast-none" 
+                *ngFor='let data of dataPage.brand; let i = index'
+                data-aos="fade-up" 
+                data-aos-duration="300">
+                <app-list-brands 
+                    [dataList]="data"
+                    color="#005DA0"
+                    widthImg="180px"
+                    [uppercase]="true">
+                </app-list-brands>
+            </div>
+        </div>
+    </div>
+</div>
+

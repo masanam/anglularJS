@@ -1,0 +1,18 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="news-detail" *ngIf="!loading && dataNewsDetail">
+    <div class="full-pad15">
+        <div class="bg-pages" 
+            [ngStyle]="{'background-image': 'url(' + apiAsset + dataNewsDetail?.picture + ')'}">
+        </div>
+    </div>
+    <div class="group mt-4">
+        <div class="title text-md-left text-center mb-4">
+            <h4 class="c-blue">{{ dataNewsDetail?.title }}</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="detail list-circle text-justify" [innerHTML]="dataNewsDetail?.content">
+        </div>
+    </div>
+</div>

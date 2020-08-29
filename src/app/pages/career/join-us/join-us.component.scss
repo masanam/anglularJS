@@ -1,0 +1,287 @@
+.join-us{
+    .logo{
+        .warp{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;;
+        }
+        .warp-logo{
+            width: 20%;
+            display: block;
+        }
+    }
+    
+    .list-jobs{
+        .title{
+            border-bottom: 2px solid #949599;
+            position: relative;
+            font-weight: 400;
+            padding-right: 75px;
+            &::before{
+                content: 'Read More';
+                position: absolute;
+                font-size: 0.9rem;
+                right: 0px;
+                color:  #FAA419;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+        .panel-open{
+            .title{
+                &::before{
+                    content: 'Show Less';
+                }
+            }
+        }
+        .yellow-btn{
+            padding: 5px 28px;
+        }
+    }
+    
+    .apply-pop{
+        .modal-content{
+            border-radius: 4px
+        }
+
+        .modal-x{
+            i{
+                color: white;
+            }
+        }
+
+        .modal-body{
+            padding: 3.5rem 2.5rem;
+        }
+
+        .bg-recuit {
+            background: #00569F;
+            color: white;
+            padding: 7px 10px;
+            .btn-log {
+                font-size: 0.9rem;
+                cursor: pointer;
+                span.icon{
+                    color: #FAA616;
+                    font-size: 15pt;
+                    padding-left: 10px;
+                }
+            }
+        }
+
+        .form-apply{
+            .form-control{
+                border: 1px solid #C4C4C4;
+                box-sizing: border-box;
+                border-radius: 5px;
+            }
+
+            .for-1 {
+                width: 32%;
+                padding-right: 10px;            
+            }
+
+            .for-2 {
+                width: 68%;
+            }
+
+            .submit{
+                .btn{
+                    padding: 8px 30px;
+                }
+            }
+            
+            .box-file {
+                border: 1px solid #C4C4C4;
+                border-radius: 5px;
+                padding: 20px;
+            }
+            
+            .border-dash {
+                border: 2px dashed #C4C4C4;
+                border-radius: 5px;
+                position: relative;
+                padding: 40px 20px;
+                &:hover{ 
+                    border: 2px dashed #3B5998;
+                    transition: .3s all;
+                }
+                .accept{
+                    color: #C4C4C4;
+                    font-size: .9rem;
+                    font-weight: 300;
+                }
+                .file-name{
+                    color: #C4C4C4;
+                }
+                .icon{
+                    width: 75px
+                }
+                .drop {
+                    position: absolute;
+                    width: 100%;
+                    left: 0px;
+                    height: 100%;
+                    z-index: 1;
+                    opacity: 0;
+                }
+            }
+
+        }
+
+        .title-apply{
+            .assistant{
+                border-bottom: 1px solid #949599;
+                padding: 0 15px;
+                display: table;
+                margin: 0 auto;
+                font-weight: 400;
+            }
+        }
+
+    }
+    
+    
+    .login-pop{
+        .modal-content{
+            border-radius: 4px
+        }
+
+        .modal-body{
+            padding: 0px;
+        }
+
+        .title-apply{
+            background: #003263;
+            border-radius: 0px 0px 4px 4px;
+            color: white;
+            padding: 20px 15px;
+        }
+
+        .welcom{
+            font-size: 0.85rem;
+        }
+        
+        .modal-dialog .modal-x i {
+           color: white;
+        }
+        
+        .sos-warp{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            border-radius: 41px;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .fb{
+            background: #2867B2;
+            .icon-1{
+                width: 15px;
+            }
+        }
+
+        .google{
+            background: #FAA61A;
+            .icon-2{
+                width: 45px;
+            }
+        }
+
+        .or-warp{
+            position: relative;
+            hr.lane{
+                border: 1px solid #000000;
+            }
+            .or{
+                position: absolute;
+                width: 50px;
+                top: 50%;
+                display: inline-block;
+                z-index: 2;
+                background: white;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .note{
+            font-size: 12px;
+        }
+
+        .back-arrow{
+            font-size: 20pt;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+    }
+}
+
+
+// Responsive
+
+@media only screen and (max-width: 991px){
+    .join-us{
+        .logo{
+            .warp-logo{
+                width: 25%;
+            }
+        }
+          
+        .apply-pop{
+            .modal-body{
+                padding: 2rem 15px;
+                padding-bottom: 1rem;
+            }
+
+            .title-apply{
+                .fams{
+                    font-size: 0.8rem;
+                }
+                .assistant{
+                    font-size: 0.9rem;
+                }
+            }
+
+            .form-apply{
+                .for-1 {
+                    font-size: 9pt;
+                }
+    
+                input.form-control{
+                    height: 25px;
+                }
+    
+                .box-file {
+                    padding: 10px;
+                }
+    
+                .border-dash {
+                    padding: 10px;
+                    .icon{
+                        width: 40px;
+                    }
+                    .warp{
+                        .accept, h6, p, .dang-file{
+                            font-size: 0.55rem;
+                        }
+                    }
+                }
+                
+                .submit{
+                    small{
+                        font-size: 60%;
+                    }
+                    .btn{
+                        padding: 5px 30px;
+                    }
+                }
+            }
+
+        }
+    }
+}

@@ -1,0 +1,64 @@
+.board{
+    .modal-director{
+        .img{
+            width: 30%;
+            position: relative;
+            img{
+                object-fit: cover;
+            }
+            &::before{
+                content: "";
+                width: 50%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                right: 0;
+                background: linear-gradient(90deg,transparent,#fff);
+            }
+        }
+
+        .modal-body{
+            padding: 0px;
+        }
+        
+        .detail{
+            width: 70%;
+            padding-right: 36px;
+            font-size: 0.9rem;
+            h4.name{
+                font-size: 1.4rem;
+            }
+            .prof{
+                height: 220px;
+                overflow: hidden;
+                overflow-y: scroll;
+                padding-right: 15px;
+            }
+        }
+    }
+}
+
+// Responsive
+
+@media only screen and (max-width: 991px){
+    .board{
+        .modal-director{
+            .img{
+                width: 35%;
+            }
+            .detail{
+                padding-right: 26px;
+                width: 65%;
+                font-size: 0.6rem;
+                h4.name{
+                    font-size: 0.9rem;
+                }
+                .prof{
+                    height: 150px;
+                    padding-right: 10px;
+                }
+            }
+        }
+    }
+}
+

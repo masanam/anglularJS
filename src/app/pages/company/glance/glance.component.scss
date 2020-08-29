@@ -1,0 +1,8 @@
+.glance{
+    .pad{
+        padding-bottom: 42px;
+        &:last-child{
+            padding-bottom: 15px;
+        }
+    }
+}

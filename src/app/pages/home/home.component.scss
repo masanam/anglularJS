@@ -1,0 +1,200 @@
+.home{
+    .join-team{
+        margin: 6rem 0px;
+        .bg-left{
+            height: 300px;
+            object-fit: cover;
+        }
+    }
+    // .modal-glance{
+    //     .modal-body {
+    //         padding: 1.3rem;
+    //         padding-top: 2.5rem;
+    //         .img{
+    //             width: 20%;
+    //         }
+    //         .detail{
+    //             width: 80%;
+    //         }
+    //     }
+    // }
+    .slider-logo{
+        img{
+            cursor: pointer;
+        }
+    }
+    .slider-label{
+        .carousel-caption {
+            background-image: url('../../../assets/img/bg-page/bg-slider-home.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 570px;
+            left: 0px;
+            right: initial;
+            bottom: 0px;
+            text-align: left;
+            padding: 30px 110px 30px 70px;
+            height: 220px;
+            overflow: hidden;
+            .yellow-border{
+                width: 75px;
+            }
+            p{
+                color: black;
+                font-size: 0.95rem
+            }
+            h5{
+                font-size: 1.25rem;
+                line-height: 27px;
+            }
+        }
+        .item{
+            img{
+                height: 400px;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+    }
+    .press-news{
+        .title{
+            margin-bottom: 1.8rem;
+        }
+    }
+}
+
+
+// Responsive
+
+
+@media only screen and (min-width: 768px){
+    .home{
+        .slider-logo{
+            .row{
+                margin: 0px -15px !important;
+            }
+        }
+    }
+}
+
+
+@media only screen and (min-width: 992px){
+    .home{
+        .slider-logo{
+            .row{
+                margin: 0px -50px !important;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1300px){
+    .home{
+        .slider-logo{
+            .row{
+                margin: 0px -100px !important;
+            }
+            .logoCom{
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+                img {
+                    transition: transform .3s linear;
+                    &:hover{
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 991px){
+    // .home{
+    //     .modal-glance {
+    //         .modal-body {
+    //             padding: 1rem;
+    //             padding-top: 2.3rem;
+    //             .detail{
+    //                 font-size: 0.8rem;
+    //                 h5{
+    //                     font-size: 0.95rem;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+}
+
+@media only screen and (max-width: 800px){
+    .home{
+        .slider-label{
+            .carousel-caption {
+                width: 450px;
+                padding: 20px 80px 20px 50px;
+                height: 170px;
+                p{
+                    font-size: 0.8rem
+                }
+                h5{
+                    font-size: 1.04rem;
+                    line-height: normal;
+                }
+            }
+            .item{
+                img{
+                    height: 310px;
+                }
+            }
+        }
+        // .modal-glance {
+        //     .modal-body {
+        //         .img{
+        //             width: 33%;
+        //         }
+        //         .detail{
+        //             width: 67%;
+        //         }
+        //     }
+        // }
+    }
+}
+
+@media only screen and (max-width: 767px){
+    .home{
+        .join-team{
+            margin: 4rem 0px;
+            font-size: 0.9rem;
+            .bg-left{
+                height: 200px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 499px){
+    .home{
+        .slider-label{
+            .carousel-caption {
+                width: 320px;
+                padding: 15px 50px 15px 30px;
+                height: 125px;
+                .yellow-border{
+                    width: 40px;
+                }
+                p{
+                    font-size: 0.6rem
+                }
+                h5{
+                    font-size: 0.7rem;
+                    margin-bottom: 0px;
+                }
+            }
+        }
+        .slider-ourbrands{
+            .b-tit{
+                font-size: 1.1rem;
+            }
+        }
+    }
+}

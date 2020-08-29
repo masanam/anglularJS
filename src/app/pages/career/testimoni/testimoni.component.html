@@ -1,0 +1,92 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+</div>
+<div class="testimoni" *ngIf="!loading && dataTestimonies && bgImg">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <div class="title text-md-left text-center mt-lg-5 my-4">
+        <h4 class="c-blue">{{ titlePage }}</h4>
+        <hr class="yellow-border ml-md-0">
+    </div>
+    <div class="director">
+        <div class="row align-items-md-end">
+            <div class="col-md-4 p-lg-4 p-md-3 p-4" 
+                *ngFor="let director of dataTestimonies | 
+                paginate: { id: 'director', itemsPerPage: 3, currentPage: pageDirector}">
+                <div class="testi-peop text-center">
+                    <h6 class="title c-blue">{{ director.title }}</h6>
+                    <img class="py-3" [src]="apiAsset + director.picture" width="100%" alt="">
+                    <div class="summary no-list" [innerHTML]="director.summary"></div>
+                    <button (click)="showModal(director)" class="btn blue-btn mt-3">click here</button>
+                </div>
+            </div>
+        </div>
+        <pagination-template 
+            id="director"
+            #direc="paginationApi" 
+            (pageChange)="pageDirector = $event" 
+            autoHide="true" 
+            maxSize="5">
+            <nav class="pt-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" 
+                        [class.disabled]="direc.isFirstPage()" 
+                        aria-disabled="true">
+                        <a class="page-link" (click)="direc.previous()">Prev</a>
+                    </li>
+                    <div *ngFor="let page of direc.pages" 
+                        [class.current]="direc.getCurrent() === page.value">
+                        <li class="page-item">
+                            <a class="page-link" 
+                            (click)="direc.setCurrent(page.value)"
+                                *ngIf="direc.getCurrent() !== page.value">
+                                <span>{{ page.label }}</span>
+                            </a>
+                        </li>
+                        <li class="page-item active" *ngIf="direc.getCurrent() === page.value">
+                            <a class="page-link" class="page-link">
+                                <span>{{ page.label }}</span>
+                            </a>
+                        </li>                        
+                    </div>
+                    <li class="page-item" 
+                        [class.disabled]="direc.isLastPage()" 
+                        aria-disabled="true">
+                        <a class="page-link" (click)="direc.next()">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </pagination-template>
+    </div>
+    <!-- modal testimoni -->
+    <div *ngIf="isModalShown" 
+        [config]="{ show: true }" 
+        (onHidden)="onHidden()" 
+        bsModal 
+        #autoShownModal="bs-modal"
+        class="modal fade modal-testy"
+        tabindex="-1" 
+        role="dialog" 
+        aria-labelledby="dialog-auto-name">
+        <div class="modal-dialog py-4 my-0 h-100 modal-lg">
+            <div class="modal-content">
+                <div class="modal-x" aria-label="Close" (click)="hideModal()">
+                    <span aria-hidden="true"><i class="icon ion-ios-close"></i></span>
+                </div>
+                <div class="modal-body d-flex">
+                    <div class="img">
+                        <img class="w-100" [src]="apiAsset + imgModal" [alt]="titleModal">
+                    </div>
+                    <div class="detail scrollable pl-lg-4 px-3">
+                        <h5 class="c-blue">{{ titleModal }}</h5>
+                        <h6 class="mt-2">{{ nameModal }}</h6>
+                        <div class="tesy my-sm-3 my-2 text-justify" [innerHTML]="detailModal"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

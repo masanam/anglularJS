@@ -1,0 +1,114 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+</div>
+<div class="work-kino" *ngIf="!loading && bgImg && dataUnique && dataDevelop">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <div class="mt-md-5 mt-4 mb-5">
+        <app-widget-career
+            [dataWidget]="dataUnique">
+            <!-- content -->
+            <div class="row symbol-unique">
+                <div class="pl-md-2 col-6 warp" *ngFor="let symbol of dataUnique?.content">
+                    <div class="show-symbol d-flex align-items-center" (click)="showModal(symbol)">
+                        <img [src]="apiAsset + symbol.picture" [alt]="symbol.picture">
+                        <span class="c-blue"><b>{{ symbol.title }}</b></span>
+                    </div>
+                </div>
+            </div>
+        </app-widget-career>
+    </div>
+    <div class="mb-3">
+        <app-widget-career
+            [dataWidget]="dataDevelop">
+            <!-- content -->
+            <div class="row">
+                <div class="col-md-12 pl-md-2 pt-md-0 pr-md-3 pt-4 px-4">
+                    <div class="widcar-detail" [innerHTML]="dataDevelop?.content">
+                    </div>
+                    <div class="join text-md-left text-center mt-4">
+                        <a [routerLink]="'/'+lang+'/careers/join-us'" class="btn blue-btn">Join Now</a>
+                    </div>
+                </div>
+            </div>
+        </app-widget-career>
+    </div>
+    <!-- modal symbol -->
+    <div *ngIf="isModalSymbol" 
+        [config]="{ show: true }" 
+        (onHidden)="onHidden()" 
+        bsModal 
+        #autoShownModal="bs-modal"
+        class="modal fade symbol-pop"
+        tabindex="-1" 
+        role="dialog" 
+        aria-labelledby="dialog-auto-name">
+        <div class="modal-dialog py-4 my-0 h-100 modal-md">
+            <div class="modal-content">
+                <div class="modal-x" aria-label="Close" (click)="hideModal()">
+                    <span aria-hidden="true"><i class="icon ion-ios-close"></i></span>
+                </div>
+                <div class="modal-body d-flex">
+                    <div class="img">
+                        <img class="w-100" [src]="apiAsset + symbolIcon" [alt]="symbolTitle">
+                    </div>
+                    <div class="detail pl-4 pr-3">
+                        <h4 class="c-blue">{{ symbolTitle }}</h4>
+                        <div class="my-sm-3 my-2 text-justify" [innerHTML]="symbolDetail"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal danger -->
+    <div *ngIf="isModalDanger" 
+        [config]="{ show: true }" 
+        (onHidden)="onHidden()" 
+        bsModal 
+        #autoShownModal="bs-modal"
+        class="modal fade danger-pop"
+        tabindex="-1" 
+        role="dialog" 
+        aria-labelledby="dialog-auto-name">
+        <div class="modal-dialog py-4 my-0 h-100 modal-md">
+            <div class="modal-content">
+                <div class="modal-x" aria-label="Close" (click)="hideModal()">
+                    <span aria-hidden="true"><i class="icon ion-ios-close"></i></span>
+                </div>
+                <!-- indonesia -->
+                <div class="modal-body d-flex modal-body d-flex align-items-center" 
+                    *ngIf="lang === 'id'">
+                    <div class="detail py-4 px-3">
+                        <h5 class="dang-tit c-blue">WASPADA PENIPUAN!</h5>
+                        <p>Kino Indonesia tidak pernah menunjuk pihak ketiga untuk memungut biaya / kompensasi apapun terkait proses rekrutmen.<br>
+                            Bila Anda memiliki keraguan terkait proses rekrutmen Kino, segera hubungi HRD kami melalui
+                            <a class="link-href" href="mailto:recruitment@kino.co.id">recruitment@kino.co.id</a>  
+                        </p>
+                    </div>
+                    <div class="icon pr-4">
+                        <img class="w-100" src="../../../../assets/img/icons/icon-hand.png" alt="">
+                    </div>
+                </div>
+                <!-- english -->
+                <div class="modal-body d-flex modal-body d-flex align-items-center"
+                    *ngIf="lang === 'en'">
+                    <div class="detail py-4 px-3">
+                        <h5 class="dang-tit c-blue">BEWARE OF RECRUITMENT FRAUD!</h5>
+                        <p>Kino Indonesia never require any person/ parties to receive payments / compensation for any recruitment purposes.<br> 
+                           Clarify your doubts related to recruitment process to our Human Capital Division through
+                           <a class="link-href" href="mailto:recruitment@kino.co.id">recruitment@kino.co.id</a> 
+                        </p>
+                    </div>
+                    <div class="icon pr-4">
+                        <img class="w-100" src="../../../../assets/img/icons/icon-hand.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

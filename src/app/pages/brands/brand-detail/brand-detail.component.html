@@ -1,0 +1,65 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="brand-detail" *ngIf="!loading && bgImg && dataBrandDetail">
+    <div class="full-pad15">
+        <div class="bg-pages" [style.background-image]="bgImg">
+        </div>
+    </div>
+    <div class="detail mt-md-5 mt-4">
+        <div class="title text-md-left text-center mb-4">
+            <h4 class="c-blue">{{ dataBrandDetail?.title }} {{ varietyName }}</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="row align-items-center">
+            <div class="col-md-7 pb-md-0 pb-3 order-md-1 order-1 d-md-none d-block">
+                <p class="text-justify" [innerHTML]="varietyDetail"></p>
+                <p class="tagline py-4">{{ dataBrandDetail?.tagline }}</p>
+            </div>
+            <div class="col-md-7 order-md-2 order-3">
+                <p class="text-justify d-md-block d-none" [innerHTML]="varietyDetail"></p>
+                <p class="tagline py-4 d-md-block d-none">{{ dataBrandDetail?.tagline }}</p>
+                <p *ngIf="langTit === 'en'" class="c-blue pt-md-0 py-4 tit-var">Variety of Products</p>
+                <p *ngIf="langTit === 'id'" class="c-blue pt-md-0 py-4 tit-var">Varian Produk</p>
+                <div class="variety-buttons row">
+                    <div class="col-6 px-1 pb-2" 
+                        *ngFor="let variety of dataBrandDetail.product">
+                        <button class="btn variant-btn d-block w-100 h-100" 
+                        [ngClass]="{'active': varietyName == variety.title}"
+                        (click)="changeVariety(variety)">
+                            {{ variety.title }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 variant-img order-md-3 order-2">
+                <div class="pl-xl-5 pl-md-0 py-md-0 pr-md-0 px-4 pt-4 pb-3">
+                    <img [src]="apiAsset + varietyImg" class="w-100" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="follow d-flex align-items-center" 
+        *ngIf="dataBrandDetail?.youtube || dataBrandDetail?.instagram || dataBrandDetail?.facebook">
+        <div class="p-2">
+            <p *ngIf="langTit === 'en'">Follow Us:</p>
+            <p *ngIf="langTit === 'id'">Ikuti Kami:</p>
+        </div>
+        <div class="p-2" *ngIf="dataBrandDetail?.youtube">
+            <a [href]="dataBrandDetail?.youtube" target="_blank">
+                <img src="../../../../assets/img/icons/yt.svg" style="width: 33px" alt="">
+            </a>
+        </div>
+        <div class="p-2" *ngIf="dataBrandDetail?.instagram">
+            <a [href]="dataBrandDetail?.instagram" target="_blank">
+                <img src="../../../../assets/img/icons/ig.svg" style="width: 26px" alt="">
+            </a>
+        </div>
+        <div class="p-2" *ngIf="dataBrandDetail?.facebook">
+            <a [href]="dataBrandDetail?.facebook" target="_blank">
+                <img src="../../../../assets/img/icons/fb.svg" style="width: 25px" alt="">
+            </a>
+        </div>
+    </div>
+</div>
+

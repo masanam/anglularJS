@@ -1,0 +1,67 @@
+
+
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="announ-others" 
+    *ngIf="!loading && bgImg && dataOthers">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <div class="others mt-md-5 mt-4">
+        <div class="title text-md-left text-center mb-4">
+            <h4 class="c-blue">{{ titlePage }}</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="row file-row1">
+            <div class="col-sm-4 col-6 pad"
+                *ngFor="let others of dataOthers
+                | paginate: { id: 'others', itemsPerPage: 3, currentPage: pageOthers}">
+                <app-files [dataFiles]="others"></app-files>
+            </div>
+        </div>
+        <pagination-template 
+            id="others"
+            #other="paginationApi" 
+            (pageChange)="pageOthers = $event" 
+            autoHide="true" 
+            maxSize="5">
+            <nav class="pt-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" 
+                        [class.disabled]="other.isFirstPage()" 
+                        aria-disabled="true">
+                        <a class="page-link" (click)="other.previous()">Prev</a>
+                    </li>
+                    <div *ngFor="let page of other.pages" 
+                        [class.current]="other.getCurrent() === page.value">
+                        <li class="page-item">
+                            <a class="page-link" 
+                            (click)="other.setCurrent(page.value)"
+                                *ngIf="other.getCurrent() !== page.value">
+                                <span>{{ page.label }}</span>
+                            </a>
+                        </li>
+                        <li class="page-item active" *ngIf="other.getCurrent() === page.value">
+                            <a class="page-link" class="page-link">
+                                <span>{{ page.label }}</span>
+                            </a>
+                        </li>                        
+                    </div>
+                    <li class="page-item" 
+                        [class.disabled]="other.isLastPage()" 
+                        aria-disabled="true">
+                        <a class="page-link" (click)="other.next()">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </pagination-template>
+    </div>
+</div>
+
+        
+
+
+
+

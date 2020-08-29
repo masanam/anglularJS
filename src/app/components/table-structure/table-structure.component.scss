@@ -1,0 +1,46 @@
+.table-structure{
+    .bg-head {
+        background: #005DA0;
+        color: white;
+        padding: 10px;
+    }
+    table {
+        border-left: 1px solid #949599;
+        border-right: 1px solid #949599;
+    }
+    .struc{
+        border-bottom: 1px solid #949599;
+        td{
+            padding: 10px;
+        }
+        .sub{
+            font-size: 0.8rem;
+        }
+        .position, .member{
+            width: 50%;
+        }
+    }
+}
+
+// Responsive
+
+@media only screen and (max-width: 767px){
+    .table-structure{
+        .bg-head{
+            h6{
+                font-size: 0.85rem;
+            }
+        }
+        .struc{
+            .position{
+                font-size: 0.85rem;
+            }
+            .name{
+                font-size: 0.85rem;
+            }
+            .sub{
+                font-size: 0.7rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,32 @@
+<div class="table-structure">
+    <div class="bg-head">
+        <h6>{{ category }}</h6>
+    </div>
+    <table class="w-100">
+        <!-- List Chairman -->
+        <tr class="struc">
+            <td class="position"><b>Chairman</b></td>
+            <td class="no-list member">
+                <ul class="mb-1" *ngFor="let mem of dataStructure">
+                    <li *ngIf="mem.title == 2" class="name"><b>{{ mem.fullname }}</b></li>
+                    <li *ngIf="mem.title == 2" class="sub"><i>{{ mem.position }}</i></li>
+                </ul>
+            </td>
+        </tr>
+        <!-- List Member -->
+        <tr class="struc">
+            <td class="position"><b>Member</b></td>
+            <td class="no-list member">
+                <ul class="mb-1" *ngFor="let mem of dataStructure">
+                    <li *ngIf="mem.title == 1 || mem.title == 3" 
+                        class="name">
+                            <b>{{ mem.fullname }}</b>
+                    </li>
+                    <li class="sub" *ngIf="mem.title == 1 || mem.title == 3">
+                        <i>{{ mem.position }}</i>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,55 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+</div>
+<div class="glance" *ngIf="!loading && bgImg && dataGroups">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <div class="list-group mt-md-5 mt-4">
+        <div class="title text-md-left text-center mb-5">
+            <h4 class="c-blue">{{ titlePage }}</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <div class="groups">
+            <div class="pad blast-none"
+                *ngFor='let data of dataGroups; let i = index'
+                data-aos="fade-up" 
+                data-aos-duration="300">
+                <app-list-brands 
+                    [dataList]="data"
+                    widthImg="140px">
+                </app-list-brands>
+            </div>
+        </div>
+    </div>
+    <div class="group-diagram mt-5 mb-3">
+        <div class="title text-md-left text-center mb-5">
+            <h4 *ngIf="langTit === 'en'" class="c-blue">Kino Corporate Structure</h4>
+            <h4 *ngIf="langTit === 'id'" class="c-blue">Struktur Korporasi Kino</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+         <!-- desktop -->
+        <div class="picture-struc d-md-block d-none">
+            <lib-ngx-image-zoom
+                [enableLens]="true"
+                [magnification]="0.3"
+                lensHeight="130"
+                lensWidth="130"
+                [thumbImage]="dataGraphic"
+            ></lib-ngx-image-zoom>
+        </div>
+        <!-- mobile -->
+        <div class="picture-struc d-md-none d-block">
+            <lib-ngx-image-zoom
+                [enableLens]="true"
+                lensHeight="70"
+                lensWidth="70"
+                [magnification]="0.2"
+                [thumbImage]="dataGraphic"
+            ></lib-ngx-image-zoom>
+        </div>
+    </div>
+</div>
+
+        

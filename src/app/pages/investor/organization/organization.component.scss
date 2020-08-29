@@ -1,0 +1,47 @@
+
+.organization{
+    .struic-table{
+        td {
+            background: #f2f2f2;
+            padding: 10px 15px;
+            border: 7px solid white;
+        }
+        td.title{
+            width: 35%;
+            border-left: initial;
+        }
+        td.no-list{
+            border-right: initial;
+        }
+        .category{
+            background: #005DA0;
+            color: white;
+            padding: 12px 10px;
+        }
+        .name {
+            h6{
+                font-size: 1.1rem;
+            }
+            p{
+                font-size: 0.9rem;
+            }
+        }
+    }    
+}
+
+// Responsive 
+
+@media only screen and (max-width: 767px){
+    .organization{
+        .struic-table{
+            td {
+                font-size: 0.85rem;
+            }
+            .category{
+                h5{
+                    font-size: 1.07rem;
+                }
+            }
+        }    
+    }
+}

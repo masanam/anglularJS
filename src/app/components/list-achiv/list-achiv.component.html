@@ -1,0 +1,9 @@
+<div class="list-achiv" *ngIf="dataAchiv.picture">
+    <img width="100%" [src]="apiAsset + dataAchiv.picture" [alt]="dataAchiv.title">
+    <div class="overlay-mini c-blue">
+        <h6 class="mb-0" [innerHTML]="dataAchiv.title"></h6>
+    </div>
+    <div class="date">
+        <h5 class="mb-0" [innerHTML]="dataAchiv.year"></h5>
+    </div>
+</div>

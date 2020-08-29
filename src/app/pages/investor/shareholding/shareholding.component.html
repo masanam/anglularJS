@@ -1,0 +1,106 @@
+<div class="load-data" *ngIf="loading">
+    <img src="../../../../assets/img/gif-load.svg" width="100%" alt="">
+ </div>
+<div class="shareholding" 
+    *ngIf="!loading && bgImg && dataGraphic && dataComposion && dataDewan && dataOwner">
+    <div class="full-pad15">
+        <div class="bg-pages" [ngStyle]="{'background-image' : 'url('+ apiAsset + bgImg +')'}">
+        </div>
+    </div>
+    <div class="info-structure mt-md-5 mt-4 mb-3">
+        <div class="title text-md-left text-center mb-5">
+            <h4 *ngIf="langTit === 'id'" class="c-blue">Struktur Kepemilikan Saham</h4>
+            <h4 *ngIf="langTit === 'en'" class="c-blue">Share Ownership Structure</h4>
+            <hr class="yellow-border ml-md-0">
+        </div>
+        <!-- desktop -->
+        <div class="share-img d-md-block d-none">
+            <lib-ngx-image-zoom
+                [enableLens]="true"
+                [thumbImage]="dataGraphic"
+                [magnification]="1.4"
+                lensHeight="130"
+                lensWidth="130"
+            ></lib-ngx-image-zoom>
+        </div>
+        <!-- mobile -->
+        <div class="share-img d-md-none d-block">
+            <lib-ngx-image-zoom
+                [enableLens]="true"
+                [thumbImage]="dataGraphic"
+                [magnification]="1"
+                lensHeight="70"
+                lensWidth="70"
+            ></lib-ngx-image-zoom>
+        </div>
+        <div class="info mt-5">
+            <h6 *ngIf="langTit === 'id'" class="mb-4">Struktur Kepemilikan Saham</h6>
+            <h6 *ngIf="langTit === 'en'" class="mb-4">Share Ownership Structure</h6>
+            <table class="w-100">
+                <tr *ngIf="langTit === 'en'">
+                    <th>Name</th>
+                    <th>Number of Shares</th>
+                    <th>Percentage</th>
+                </tr>
+                <tr *ngIf="langTit === 'id'">
+                    <th>Nama</th>
+                    <th>Jumlah Saham</th>
+                    <th>Persentase</th>
+                </tr>
+                <tr *ngFor="let own of dataOwner">
+                    <td>{{ own.name }}</td>
+                    <td>{{ own.quantity }}</td>
+                    <td>{{ own.persentase }}%</td>
+                </tr>
+            </table>
+            <h6 *ngIf="langTit === 'id'" class="my-4">Komposisi Kepemilikan Saham</h6>
+            <h6 *ngIf="langTit === 'en'" class="my-4">Composition of Share Ownership</h6>
+            <table class="w-100">
+                <tr *ngIf="langTit === 'en'">
+                    <th>Shareholder</th>
+                    <th>Number of Shareholders</th>
+                    <th>Number of Shares</th>
+                    <th>Percentage of Ownership</th>
+                </tr>
+                <tr *ngIf="langTit === 'id'">
+                    <th>Pemegang Saham</th>
+                    <th>Jumlah Pemegang Saham</th>
+                    <th>Jumlah Saham</th>
+                    <th>Persentase Kepemilikan</th>
+                </tr>
+                <tr *ngFor="let com of dataComposion">
+                    <td>{{ com.name }}</td>
+                    <td>{{ com.jumlah }}</td>
+                    <td>{{ com.quantity }}</td>
+                    <td>{{ com.persentase}}%</td>
+                </tr>
+            </table>
+            <h6 *ngIf="langTit === 'id'" class="my-4">Kepemilikan Saham Dewan Komisaris & Direksi</h6>
+            <h6 *ngIf="langTit === 'en'" class="my-4">Share Ownership of the Board of Commissioners & Directors</h6>
+            <table class="w-100 de-komi">
+                <tr *ngIf="langTit === 'en'">
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Number of Shares</th>
+                    <th>Percentage</th>
+                </tr>
+                <tr *ngIf="langTit === 'id'">
+                    <th>Nama</th>
+                    <th>Jabatan</th>
+                    <th>Jumlah Saham</th>
+                    <th>Persentase</th>
+                </tr>
+                <tr *ngFor="let dew of dataDewan">
+                    <td>{{ dew.name }}</td>
+                    <td>{{ dew.position }}</td>
+                    <td>{{ dew.quantity }}</td>
+                    <td>{{ dew.persentase }}%</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+        
+
+
